@@ -276,6 +276,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人网站/" itemprop="url" rel="index">
+                    <span itemprop="name">个人网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -316,8 +338,9 @@
       
         
           
-            <p>其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。<br><br>预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候http://[ip]:[jenkins的端口号]/github-webhook/<br>改成了这个就是加个斜杠，成功200.我也是醉了。</p>
-
+            <h4 id="jenkins-github-tomcat-完成自动部署项目"><a href="#jenkins-github-tomcat-完成自动部署项目" class="headerlink" title="jenkins+github+tomcat 完成自动部署项目"></a>jenkins+github+tomcat 完成自动部署项目</h4><p>服务器：阿里云<br>系统：宝塔Linux6.8.9</p>
+其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。<br>
+预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候http://[ip]:[jenkins的端口号]/github-webhook/<br>改成了这个就是加个斜杠，成功200.我也是醉了。<br>参考的详细文档：https://www.cnblogs.com/xxj0316/p/9467182.html<br>https://blog.csdn.net/weixin_43557605/article/details/95473363 这篇文章就是那个少了斜杠坑我的，但是其他问题都不会出现<br>https://www.jianshu.com/p/8ace5eb85261 这篇文档很形象的罗列了实现自动部署的方法<br>1.自动部署就是自己的项目上传到github(仓库)2.然后github（仓库管理员）使用webhook（电话）通知Payload URL（电话号码）的主机（固定电话）3.这个主机（固定电话）上的jenkins（管家）会接受到提示4.然后去执行设定好的shell指令（就是Linux下的命令）5.应为我们是实现自动部署javaweb项目，容器是tomcat。shell指令实现的功能有，a、删除tomcat下的项目.war和文件夹。b、将github传过来的javaweb压缩。c、把压缩好的文件放到tomcat下，如果有需要可以修改文件名。
           
         
       
@@ -396,7 +419,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-01T16:05:41+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-01T16:05:00+08:00">
                 2019-08-01
               </time>
             
@@ -406,6 +429,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人网站/" itemprop="url" rel="index">
+                    <span itemprop="name">个人网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -658,7 +703,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-17T19:52:26+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-17T19:52:00+08:00">
                 2019-07-17
               </time>
             
@@ -1239,7 +1284,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
