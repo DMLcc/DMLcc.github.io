@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="DMLcc">
 <meta property="og:description" content="jenkins+github+tomcat 完成自动部署项目服务器：阿里云系统：宝塔Linux6.8.9 其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。 预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-08-01T09:32:10.880Z">
+<meta property="og:updated_time" content="2019-08-02T07:17:15.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="终于自动部署成功">
 <meta name="twitter:description" content="jenkins+github+tomcat 完成自动部署项目服务器：阿里云系统：宝塔Linux6.8.9 其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。 预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302">
@@ -336,7 +336,8 @@
       
         <h4 id="jenkins-github-tomcat-完成自动部署项目"><a href="#jenkins-github-tomcat-完成自动部署项目" class="headerlink" title="jenkins+github+tomcat 完成自动部署项目"></a>jenkins+github+tomcat 完成自动部署项目</h4><p>服务器：阿里云<br>系统：宝塔Linux6.8.9</p>
 其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。<br>
-预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候http://[ip]:[jenkins的端口号]/github-webhook/<br>改成了这个就是加个斜杠，成功200.我也是醉了。<br>参考的详细文档：https://www.cnblogs.com/xxj0316/p/9467182.html<br>https://blog.csdn.net/weixin_43557605/article/details/95473363 这篇文章就是那个少了斜杠坑我的，但是其他问题都不会出现<br>https://www.jianshu.com/p/8ace5eb85261 这篇文档很形象的罗列了实现自动部署的方法<br>1.自动部署就是自己的项目上传到github(仓库)2.然后github（仓库管理员）使用webhook（电话）通知Payload URL（电话号码）的主机（固定电话）3.这个主机（固定电话）上的jenkins（管家）会接受到提示4.然后去执行设定好的shell指令（就是Linux下的命令）5.应为我们是实现自动部署javaweb项目，容器是tomcat。shell指令实现的功能有，a、删除tomcat下的项目.war和文件夹。b、将github传过来的javaweb压缩。c、把压缩好的文件放到tomcat下，如果有需要可以修改文件名。
+预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候 http://[ip]:[jenkins的端口号]/github-webhook/ 改成了这个就是加个斜杠，成功200.我也是醉了。<br>参考的详细文档：<a>https://www.cnblogs.com/xxj0316/p/9467182.html</a><br><a>https://blog.csdn.net/weixin_43557605/article/details/95473363 </a>这篇文章就是那个少了斜杠坑我的，但是其他问题都不会出现<br><a>https://www.jianshu.com/p/8ace5eb85261</a> 这篇文档很形象的罗列了实现自动部署的方法<br>名。
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.自动部署就是自己的项目上传到github(仓库)</span><br><span class="line">2.然后github（仓库管理员）使用webhook（电话）通知Payload URL（电话号码）的主机（固定电话）</span><br><span class="line">3.这个主机（固定电话）上的jenkins（管家）会接受到提示</span><br><span class="line">4.然后去执行设定好的shell指令（就是Linux下的命令）</span><br><span class="line">5.应为我们是实现自动部署javaweb项目，容器是tomcat。</span><br><span class="line">  shell指令实现的功能有:</span><br><span class="line">  a、删除tomcat下的项目.war和文件夹。</span><br><span class="line">  b、将github传过来的javaweb压缩。</span><br><span class="line">  c、把压缩好的文件放到tomcat下，如果有需要可以修改文件</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -379,6 +380,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/02/在linux服务器上安装Jenkins/" rel="prev" title="在linux服务器上安装Jenkins">
+                在linux服务器上安装Jenkins <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -460,7 +465,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -482,7 +487,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

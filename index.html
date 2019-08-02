@@ -234,6 +234,361 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/nginx的安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DMLcc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DMLcc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/02/nginx的安装/" itemprop="url">nginx的安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-02T15:20:00+08:00">
+                2019-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人网站/" itemprop="url" rel="index">
+                    <span itemprop="name">个人网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/02/nginx的安装/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/08/02/nginx的安装/" class="cy_cmt_count" data-xid="2019/08/02/nginx的安装/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </span></div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="windows版本"><a href="#windows版本" class="headerlink" title="windows版本"></a>windows版本</h3><p>1.下载nginx</p>
+<p><a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a>         下载稳定版本，以nginx/Windows-1.12.2为例，直接下载 nginx-1.12.2.zip</p>
+<p>下载后解压，解压后如下</p>
+<p>2.启动nginx</p>
+<p>有很多种方法启动nginx</p>
+<p>(1)直接双击nginx.exe，双击后一个黑色的弹窗一闪而过</p>
+<p>(2)打开cmd命令窗口，切换到nginx解压目录下，输入命令 nginx.exe 或者 start nginx ，回车即可</p>
+<p>3.检查nginx是否启动成功</p>
+<p>直接在浏览器地址栏输入网址 <a href="http://localhost:80，回车，出现以下页面说明启动成功" target="_blank" rel="noopener">http://localhost:80，回车，出现以下页面说明启动成功</a></p>
+<p>也可以在cmd命令窗口输入命令 tasklist /fi “imagename eq nginx.exe” ，出现如下结果说明启动成功</p>
+<p>nginx的配置文件是conf目录下的nginx.conf，默认配置的nginx监听的端口为80，如果80端口被占用可以修改为未被占用的端口即可</p>
+<p>检查80端口是否被占用的命令是： netstat -ano | findstr 0.0.0.0:80 或 netstat -ano | findstr “80”</p>
+<p>当我们修改了nginx的配置文件nginx.conf 时，不需要关闭nginx后重新启动nginx，只需要执行命令 nginx -s reload 即可让改动生效</p>
+<p>4.关闭nginx</p>
+<p>如果使用cmd命令窗口启动nginx，关闭cmd窗口是不能结束nginx进程的，可使用两种方法关闭nginx</p>
+<p>(1)输入nginx命令  nginx -s stop(快速停止nginx)  或  nginx -s quit(完整有序的停止nginx)</p>
+<p>(2)使用taskkill   taskkill /f /t /im nginx.exe</p>
+<p>5.使用nginx代理服务器做负载均衡</p>
+<p>我们可以修改nginx的配置文件nginx.conf 达到访问nginx代理服务器时跳转到指定服务器的目的，即通过proxy_pass 配置请求转发地址，即当我们依然输入<a href="http://localhost:80" target="_blank" rel="noopener">http://localhost:80</a> 时，请求会跳转到我们配置的服务器</p>
+<p>同理，我们可以配置多个目标服务器，当一台服务器出现故障时，nginx能将请求自动转向另一台服务器，例如配置如下：</p>
+<p>当服务器 localhost:8080 挂掉时，nginxnginx能将请求自动转向服务器 192.168.101.9:8080 。上面还加了一个weight属性，此属性表示各服务器被访问到的权重，weight</p>
+<p>越高被访问到的几率越高。</p>
+<p>6.nginx配置静态资源</p>
+<p> 将静态资源（如jpg|png|css|js等）放在如下配置的f:/nginx-1.12.2/static目录下，然后在nginx配置文件中做如下配置(注意：静态资源配置只能放在 location / 中)，浏览器中访问  <a href="http://localhost:80/1.png" target="_blank" rel="noopener">http://localhost:80/1.png</a> 即可访问到 f:/nginx-1.12.2/static目录下的 1.png图片</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">参考文档-安装即使用：https://www.cnblogs.com/jiangwangxiang/p/8481661.html</span><br><span class="line">参考文档-安装：https://www.cnblogs.com/taiyonghai/p/9402734.html</span><br><span class="line">参考文档-http配置：https://www.cnblogs.com/luxiaoyao/p/10034009.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux版本"><a href="#Linux版本" class="headerlink" title="Linux版本"></a>Linux版本</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/在linux服务器上安装Jenkins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DMLcc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DMLcc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/02/在linux服务器上安装Jenkins/" itemprop="url">在linux服务器上安装Jenkins</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-02T15:11:00+08:00">
+                2019-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人网站/" itemprop="url" rel="index">
+                    <span itemprop="name">个人网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/02/在linux服务器上安装Jenkins/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/08/02/在linux服务器上安装Jenkins/" class="cy_cmt_count" data-xid="2019/08/02/在linux服务器上安装Jenkins/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </span></div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Jenkins是用java编写的开源持续集成工具，目前被国内外各公司广泛使用。本章教大家如何在linux服务器上安装Jenkins。</p>
+<p>一、获得一台linux服务器<br>要在linux下安装git，首先你得先有一台linux服务器，作为小白，手头的机器肯定都是windows的，搞个虚拟机安装对我这种小白简直是折磨人；这里使用最简单的方式获得一台linux服务器，就是从阿里云上租一台。镜像选择CentOS7.3 64位。</p>
+<p>阿里云上租服务器<br>二、安装jdk<br>Jenkins的运行需要依赖jdk，所以在安装Jenkins之前我们得先把jdk装上。没有安装经验的同学可以参考我的另一篇在linux服务器上安装jdk的教程。传送门：在linux服务器上安装jdk</p>
+<p>三、yum安装Jenkins<br>这里推荐使用yum方式安装Jenkins，最简单方便。</p>
+<p>yum的repos中默认是没有Jenkins的，需要先将Jenkins存储库添加到yum repos。</p>
+<p>sudo wget -O /etc/yum.repos.d/jenkins.repo <a href="https://pkg.jenkins.io/redhat-stable/jenkins.repo" target="_blank" rel="noopener">https://pkg.jenkins.io/redhat-stable/jenkins.repo</a><br>sudo rpm –import <a href="https://pkg.jenkins.io/redhat-stable/jenkins.io.key" target="_blank" rel="noopener">https://pkg.jenkins.io/redhat-stable/jenkins.io.key</a><br>添加Jenkins到yum<br>yum安装Jenkins</p>
+<p>yum install jenkins<br>随后就可以看到系统开始自动下载安装。<br>出现提示是否下载的时候输入y并按回车。<br>耐心等待安装完成。</p>
+<p>yum安装Jenkins<br>现在Jenkins已经安装好了，不过启动之前最好稍微修改一下配置。默认情况是Jenkins是使用Jenkins用户启动的，但这个用户目前系统并没有赋予权限，这里我们将启动用户修改为root；另外Jenkins默认端口是8080，这个跟tomcat的默认端口冲突，我们也修改一下默认端口。<br>输入命令进入Jenkins配置文件</p>
+<p>vi /etc/sysconfig/jenkins<br>在配置文件中很容易找到</p>
+<p>Jenkins配置文件<br>此处修改配置</p>
+<p>JENKINS_USER=”root”<br>JENKINS_PORT=”8081”<br>修改配置文件<br>修改完配置后，保存退出。<br>好了，现在配置文件也修改好了，可以启动Jenkins了。<br>输入启动命令以启动Jenkins服务。</p>
+<p>service jenkins start<br>Jenkins启动成功<br>出现OK表示Jenkins启动成功。<br>在浏览器输入ip:8081进入Jenkins登录页面。</p>
+<p>Jenkins首次登录<br>进入登录页面后，Jenkins提示我们需要输入超级管理员密码进行解锁。根据提示，我们可以在/var/lib/jenkins/secrets/initialAdminPassword文件里找到密码。</p>
+<p>输入命令以找到密码。</p>
+<p>tail /var/lib/jenkins/secrets/initialAdminPassword<br>找到解锁密码<br>找到密码后，复制密码，粘贴到Jenkins解锁页面，点击Continue继续初始化配置。短暂的等待后，进入插件安装页面。</p>
+<p>Jenkins插件安装<br>这里我们点击的Install suggested plugins，安装默认插件，当然你也可以点击另一个按钮安装指定的插件。</p>
+<p>点击后，页面进入了插件下载安装页面。</p>
+<p>默认插件安装<br>耐心等待全部安装完成。安装完成后，页面自动进入了管理员账户注册页面。</p>
+<p>管理员账户注册<br>这个页面大家肯定都不陌生，自己输入信息注册吧。输入完信息点击Save and Finish。</p>
+<p>Jenkins安装完成<br>点击Start using Jenkins，进入Jenkins主页面。</p>
+<p>Jenkins<br>至此，Jenkins安装并初始化完成了，具体如何使用请看下一篇教程linux服务器中Jenkins集成git、Gradle持续构建Springboot项目。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考文档：https://www.jianshu.com/p/c517f09df025</span><br></pre></td></tr></table></figure>
+
+<p>首先这篇文档适合于刚接触linux的新手，对于软件打安装与命令都不是很熟悉。我也是刚接触linux系统，之前参考的文章是通过安装包来安装软件的。参考文章：<a><a href="https://blog.csdn.net/tomatocc/article/details/83930714" target="_blank" rel="noopener">https://blog.csdn.net/tomatocc/article/details/83930714</a></a></p>
+<p>我必须提醒的是可能遇到新手无法处理的问题，我一开始就是因为这样选择简单的方法，毕竟自定义还是不太适合新手。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/终于自动部署成功/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -340,7 +695,8 @@
           
             <h4 id="jenkins-github-tomcat-完成自动部署项目"><a href="#jenkins-github-tomcat-完成自动部署项目" class="headerlink" title="jenkins+github+tomcat 完成自动部署项目"></a>jenkins+github+tomcat 完成自动部署项目</h4><p>服务器：阿里云<br>系统：宝塔Linux6.8.9</p>
 其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。<br>
-预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候http://[ip]:[jenkins的端口号]/github-webhook/<br>改成了这个就是加个斜杠，成功200.我也是醉了。<br>参考的详细文档：https://www.cnblogs.com/xxj0316/p/9467182.html<br>https://blog.csdn.net/weixin_43557605/article/details/95473363 这篇文章就是那个少了斜杠坑我的，但是其他问题都不会出现<br>https://www.jianshu.com/p/8ace5eb85261 这篇文档很形象的罗列了实现自动部署的方法<br>1.自动部署就是自己的项目上传到github(仓库)2.然后github（仓库管理员）使用webhook（电话）通知Payload URL（电话号码）的主机（固定电话）3.这个主机（固定电话）上的jenkins（管家）会接受到提示4.然后去执行设定好的shell指令（就是Linux下的命令）5.应为我们是实现自动部署javaweb项目，容器是tomcat。shell指令实现的功能有，a、删除tomcat下的项目.war和文件夹。b、将github传过来的javaweb压缩。c、把压缩好的文件放到tomcat下，如果有需要可以修改文件名。
+预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候 http://[ip]:[jenkins的端口号]/github-webhook/ 改成了这个就是加个斜杠，成功200.我也是醉了。<br>参考的详细文档：<a>https://www.cnblogs.com/xxj0316/p/9467182.html</a><br><a>https://blog.csdn.net/weixin_43557605/article/details/95473363 </a>这篇文章就是那个少了斜杠坑我的，但是其他问题都不会出现<br><a>https://www.jianshu.com/p/8ace5eb85261</a> 这篇文档很形象的罗列了实现自动部署的方法<br>名。
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.自动部署就是自己的项目上传到github(仓库)</span><br><span class="line">2.然后github（仓库管理员）使用webhook（电话）通知Payload URL（电话号码）的主机（固定电话）</span><br><span class="line">3.这个主机（固定电话）上的jenkins（管家）会接受到提示</span><br><span class="line">4.然后去执行设定好的shell指令（就是Linux下的命令）</span><br><span class="line">5.应为我们是实现自动部署javaweb项目，容器是tomcat。</span><br><span class="line">  shell指令实现的功能有:</span><br><span class="line">  a、删除tomcat下的项目.war和文件夹。</span><br><span class="line">  b、将github传过来的javaweb压缩。</span><br><span class="line">  c、把压缩好的文件放到tomcat下，如果有需要可以修改文件</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1262,7 +1618,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1284,7 +1640,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

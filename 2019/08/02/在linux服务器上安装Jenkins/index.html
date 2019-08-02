@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="虽然垃圾简陋了点，但是我好歹把项目自动发布到了tomcat上了，我没用通过maven仓库的压缩，直接去用shell命令复制到了tomcat下，所以很low。现在这个页面是测试的。">
+<meta name="description" content="Jenkins是用java编写的开源持续集成工具，目前被国内外各公司广泛使用。本章教大家如何在linux服务器上安装Jenkins。 一、获得一台linux服务器要在linux下安装git，首先你得先有一台linux服务器，作为小白，手头的机器肯定都是windows的，搞个虚拟机安装对我这种小白简直是折磨人；这里使用最简单的方式获得一台linux服务器，就是从阿里云上租一台。镜像选择CentOS7">
 <meta name="keywords" content="jenkins">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自动部署网站">
-<meta property="og:url" content="http://yoursite.com/2019/08/01/自动部署网站/index.html">
+<meta property="og:title" content="在linux服务器上安装Jenkins">
+<meta property="og:url" content="http://yoursite.com/2019/08/02/在linux服务器上安装Jenkins/index.html">
 <meta property="og:site_name" content="DMLcc">
-<meta property="og:description" content="虽然垃圾简陋了点，但是我好歹把项目自动发布到了tomcat上了，我没用通过maven仓库的压缩，直接去用shell命令复制到了tomcat下，所以很low。现在这个页面是测试的。">
+<meta property="og:description" content="Jenkins是用java编写的开源持续集成工具，目前被国内外各公司广泛使用。本章教大家如何在linux服务器上安装Jenkins。 一、获得一台linux服务器要在linux下安装git，首先你得先有一台linux服务器，作为小白，手头的机器肯定都是windows的，搞个虚拟机安装对我这种小白简直是折磨人；这里使用最简单的方式获得一台linux服务器，就是从阿里云上租一台。镜像选择CentOS7">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-08-01T09:12:54.803Z">
+<meta property="og:updated_time" content="2019-08-02T07:19:09.720Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自动部署网站">
-<meta name="twitter:description" content="虽然垃圾简陋了点，但是我好歹把项目自动发布到了tomcat上了，我没用通过maven仓库的压缩，直接去用shell命令复制到了tomcat下，所以很low。现在这个页面是测试的。">
+<meta name="twitter:title" content="在linux服务器上安装Jenkins">
+<meta name="twitter:description" content="Jenkins是用java编写的开源持续集成工具，目前被国内外各公司广泛使用。本章教大家如何在linux服务器上安装Jenkins。 一、获得一台linux服务器要在linux下安装git，首先你得先有一台linux服务器，作为小白，手头的机器肯定都是windows的，搞个虚拟机安装对我这种小白简直是折磨人；这里使用最简单的方式获得一台linux服务器，就是从阿里云上租一台。镜像选择CentOS7">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/01/自动部署网站/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/02/在linux服务器上安装Jenkins/">
 
 
 
 
 
-  <title>自动部署网站 | DMLcc</title>
+  <title>在linux服务器上安装Jenkins | DMLcc</title>
   
 
 
@@ -234,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/自动部署网站/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/在linux服务器上安装Jenkins/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DMLcc">
@@ -251,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">自动部署网站</h1>
+          <h1 class="post-title" itemprop="name headline">在linux服务器上安装Jenkins</h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-01T16:05:00+08:00">
-                2019-08-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-02T15:11:00+08:00">
+                2019-08-02
               </time>
             
 
@@ -305,8 +305,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2019/08/01/自动部署网站/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/08/01/自动部署网站/" itemprop="commentsCount"></span>
+                <a href="/2019/08/02/在linux服务器上安装Jenkins/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/08/02/在linux服务器上安装Jenkins/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -334,7 +334,31 @@
       
 
       
-        <p>虽然垃圾简陋了点，但是我好歹把项目自动发布到了tomcat上了，我没用通过maven仓库的压缩，直接去用shell命令复制到了tomcat下，所以很low。现在这个页面是测试的。</p>
+        <p>Jenkins是用java编写的开源持续集成工具，目前被国内外各公司广泛使用。本章教大家如何在linux服务器上安装Jenkins。</p>
+<p>一、获得一台linux服务器<br>要在linux下安装git，首先你得先有一台linux服务器，作为小白，手头的机器肯定都是windows的，搞个虚拟机安装对我这种小白简直是折磨人；这里使用最简单的方式获得一台linux服务器，就是从阿里云上租一台。镜像选择CentOS7.3 64位。</p>
+<p>阿里云上租服务器<br>二、安装jdk<br>Jenkins的运行需要依赖jdk，所以在安装Jenkins之前我们得先把jdk装上。没有安装经验的同学可以参考我的另一篇在linux服务器上安装jdk的教程。传送门：在linux服务器上安装jdk</p>
+<p>三、yum安装Jenkins<br>这里推荐使用yum方式安装Jenkins，最简单方便。</p>
+<p>yum的repos中默认是没有Jenkins的，需要先将Jenkins存储库添加到yum repos。</p>
+<p>sudo wget -O /etc/yum.repos.d/jenkins.repo <a href="https://pkg.jenkins.io/redhat-stable/jenkins.repo" target="_blank" rel="noopener">https://pkg.jenkins.io/redhat-stable/jenkins.repo</a><br>sudo rpm –import <a href="https://pkg.jenkins.io/redhat-stable/jenkins.io.key" target="_blank" rel="noopener">https://pkg.jenkins.io/redhat-stable/jenkins.io.key</a><br>添加Jenkins到yum<br>yum安装Jenkins</p>
+<p>yum install jenkins<br>随后就可以看到系统开始自动下载安装。<br>出现提示是否下载的时候输入y并按回车。<br>耐心等待安装完成。</p>
+<p>yum安装Jenkins<br>现在Jenkins已经安装好了，不过启动之前最好稍微修改一下配置。默认情况是Jenkins是使用Jenkins用户启动的，但这个用户目前系统并没有赋予权限，这里我们将启动用户修改为root；另外Jenkins默认端口是8080，这个跟tomcat的默认端口冲突，我们也修改一下默认端口。<br>输入命令进入Jenkins配置文件</p>
+<p>vi /etc/sysconfig/jenkins<br>在配置文件中很容易找到</p>
+<p>Jenkins配置文件<br>此处修改配置</p>
+<p>JENKINS_USER=”root”<br>JENKINS_PORT=”8081”<br>修改配置文件<br>修改完配置后，保存退出。<br>好了，现在配置文件也修改好了，可以启动Jenkins了。<br>输入启动命令以启动Jenkins服务。</p>
+<p>service jenkins start<br>Jenkins启动成功<br>出现OK表示Jenkins启动成功。<br>在浏览器输入ip:8081进入Jenkins登录页面。</p>
+<p>Jenkins首次登录<br>进入登录页面后，Jenkins提示我们需要输入超级管理员密码进行解锁。根据提示，我们可以在/var/lib/jenkins/secrets/initialAdminPassword文件里找到密码。</p>
+<p>输入命令以找到密码。</p>
+<p>tail /var/lib/jenkins/secrets/initialAdminPassword<br>找到解锁密码<br>找到密码后，复制密码，粘贴到Jenkins解锁页面，点击Continue继续初始化配置。短暂的等待后，进入插件安装页面。</p>
+<p>Jenkins插件安装<br>这里我们点击的Install suggested plugins，安装默认插件，当然你也可以点击另一个按钮安装指定的插件。</p>
+<p>点击后，页面进入了插件下载安装页面。</p>
+<p>默认插件安装<br>耐心等待全部安装完成。安装完成后，页面自动进入了管理员账户注册页面。</p>
+<p>管理员账户注册<br>这个页面大家肯定都不陌生，自己输入信息注册吧。输入完信息点击Save and Finish。</p>
+<p>Jenkins安装完成<br>点击Start using Jenkins，进入Jenkins主页面。</p>
+<p>Jenkins<br>至此，Jenkins安装并初始化完成了，具体如何使用请看下一篇教程linux服务器中Jenkins集成git、Gradle持续构建Springboot项目。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考文档：https://www.jianshu.com/p/c517f09df025</span><br></pre></td></tr></table></figure>
+
+<p>首先这篇文档适合于刚接触linux的新手，对于软件打安装与命令都不是很熟悉。我也是刚接触linux系统，之前参考的文章是通过安装包来安装软件的。参考文章：<a><a href="https://blog.csdn.net/tomatocc/article/details/83930714" target="_blank" rel="noopener">https://blog.csdn.net/tomatocc/article/details/83930714</a></a></p>
+<p>我必须提醒的是可能遇到新手无法处理的问题，我一开始就是因为这样选择简单的方法，毕竟自定义还是不太适合新手。</p>
 
       
     </div>
@@ -365,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/把项目push到github上/" rel="next" title="把项目push到github上">
-                <i class="fa fa-chevron-left"></i> 把项目push到github上
+              <a href="/2019/08/01/终于自动部署成功/" rel="next" title="终于自动部署成功">
+                <i class="fa fa-chevron-left"></i> 终于自动部署成功
               </a>
             
           </div>
@@ -375,8 +399,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/01/终于自动部署成功/" rel="prev" title="终于自动部署成功">
-                终于自动部署成功 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/02/nginx的安装/" rel="prev" title="nginx的安装">
+                nginx的安装 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
