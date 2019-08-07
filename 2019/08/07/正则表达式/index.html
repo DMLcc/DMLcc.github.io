@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在我们处理文件时，很多时候会用到查找与替换。当我们想将文件中某一部分替换替换文件中另一部分时，怎么办呢？ 下面正则表达式 给我提供方法。正则表达式，提供复杂并且弹性的查找与替换工具例如：notpad++ 1 基本表达式 符号  解释  .  匹配任意字符，除了新一行(\n)。也就是说 “.”可以匹配 \r ，当文件中同时含有\r and \n时，会引起混乱。要匹配所有的字符，使用\s\S。  (…">
+<meta name="keywords" content="DMLcc，肯定会，java，python，电台，教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NotePad++ 正则表达式">
+<meta property="og:url" content="http://yoursite.com/2019/08/07/正则表达式/index.html">
+<meta property="og:site_name" content="DMLcc">
+<meta property="og:description" content="在我们处理文件时，很多时候会用到查找与替换。当我们想将文件中某一部分替换替换文件中另一部分时，怎么办呢？ 下面正则表达式 给我提供方法。正则表达式，提供复杂并且弹性的查找与替换工具例如：notpad++ 1 基本表达式 符号  解释  .  匹配任意字符，除了新一行(\n)。也就是说 “.”可以匹配 \r ，当文件中同时含有\r and \n时，会引起混乱。要匹配所有的字符，使用\s\S。  (…">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-08-07T03:55:10.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NotePad++ 正则表达式">
+<meta name="twitter:description" content="在我们处理文件时，很多时候会用到查找与替换。当我们想将文件中某一部分替换替换文件中另一部分时，怎么办呢？ 下面正则表达式 给我提供方法。正则表达式，提供复杂并且弹性的查找与替换工具例如：notpad++ 1 基本表达式 符号  解释  .  匹配任意字符，除了新一行(\n)。也就是说 “.”可以匹配 \r ，当文件中同时含有\r and \n时，会引起混乱。要匹配所有的字符，使用\s\S。  (…">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/07/正则表达式/">
+
+
+
+
+
+  <title>NotePad++ 正则表达式 | DMLcc</title>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="/js/love.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DMLcc</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">第一次测试</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DMLcc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DMLcc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NotePad++ 正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T11:23:50+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/07/正则表达式/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/08/07/正则表达式/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </span></div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在我们处理文件时，很多时候会用到查找与替换。当我们想将文件中某一部分替换替换文件中另一部分时，怎么办呢？ 下面正则表达式 给我提供方法。<br><br>正则表达式，提供复杂并且弹性的查找与替换<br><br>工具例如：notpad++</p>
+<h4 id="1-基本表达式"><a href="#1-基本表达式" class="headerlink" title="1 基本表达式"></a>1 基本表达式</h4><table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">符号</span></th>
+<th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">解释</span></th>
+</tr></thead><tbody><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">.</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配任意字符，除了新一行(\n)。也就是说 “.”可以匹配 \r ，当文件中同时含有\r and \n时，会引起混乱。要匹配所有的字符，使用\s\S。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">这个匹配一个标签区域. 这个标签可以被访问，通过语法 \1访问第一个标签, \2 访问第二个, 同理 \3 \4 … \9。 这些标签可以用在当前正则表达式中，或则替search和replace中的换字符串。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\1, \2, etc</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">在替换中代表1到9的标签区域(\1 to \9)。例如, 查找字符串 Fred([1-9])XXX 并替换为字符串 Sam\1YYY的方法，当在文件中找到Fred2XXX的字符串时，会替换为Sam2YYY。注意: 只有9个区域能使用，所以我们在使用时很安全，像\10\2 表示区域1和文本”0”以及区域2。</span></td>
+### 1 基本表达式
+<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">符号</span></th>
+<th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">解释</span></th>
+</tr></thead><tbody><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">.</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配任意字符，除了新一行(\n)。也就是说 “.”可以匹配 \r ，当文件中同时含有\r and \n时，会引起混乱。要匹配所有的字符，使用\s\S。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">这个匹配一个标签区域. 这个标签可以被访问，通过语法 \1访问第一个标签, \2 访问第二个, 同理 \3 \4 … \9。 这些标签可以用在当前正则表达式中，或则替search和replace中的换字符串。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\1, \2, etc</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">在替换中代表1到9的标签区域(\1 to \9)。例如, 查找字符串 Fred([1-9])XXX 并替换为字符串 Sam\1YYY的方法，当在文件中找到Fred2XXX的字符串时，会替换为Sam2YYY。注意: 只有9个区域能使用，所以我们在使用时很安全，像\10\2 表示区域1和文本”0”以及区域2。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[…]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">表示一个字符集合, 例如 [abc]表示任意字符 a, b or c.我们也可以使用范围例如[a-z] 表示所以的小写字母。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[^…]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">表示字符补集. 例如, [^A-Za-z] 表示任意字符除了字母表。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">^</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配一行的开始(除非在集合中, 如下).</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">$</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配行尾.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">*</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配0或多次, 例如 Sa*m 匹配 Sm, Sam, Saam, Saaam 等等.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">+</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配1次或多次,例如 Sa+m 匹配 Sam, Saam, Saaam 等等.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">?</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配0或者1次, 例如 Sa?m 匹配 Sm, Sam.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">{n}</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配确定的 n 次.例如, ‘Sa{2}m’ 匹配 Saam.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">{m,n}</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配至少m次，至多n次(如果n缺失，则任意次数).例如, ‘Sa{2,3}m’ 匹配 Saam or Saaam. ‘Sa{2,}m’ 与 ‘Saa+m’相同</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">*?, +?, ??, {n,m}?</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">非贪心匹配，匹配第一个有效的匹配，通常 ‘&lt;.&gt;’ 会匹配整个 ‘content’字符串 –但 ‘&lt;.?&gt;’ 只匹配 ” .这个标记一个标签区域，这些区域可以用语法\1 \2 等访问多个对应1-9区域。</span></td>
+</tr></tbody></table>
+#### 2 标记和分组
+<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">符号</span></th>
+<th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">解释</span></th>
+</tr></thead><tbody><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">一组捕获. 可以通过\1 访问第一个组, \2 访问第二个.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?:…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">非捕获组.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?=…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">非捕获组 – 向前断言. 例如’(.*)(?=ton)’ 表达式，当 遇到’Appleton’字符串时，会匹配为’Apple’.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?&lt;=…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">非捕获组 – 向后断言. 例如’(?&lt;=sir) (.*)’ 表示式，当遇到’sir William’ 字符串时，匹配为’ William’.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?!…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">非捕获组 – 消极的向前断言. 例如’.(?!e)’ 表达式，当遇到’Apple’时，会找到每个字母除了 ‘l’，因为它紧跟着 ‘e’.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">非捕获组 – 消极向后断言. 例如 ‘(?</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?P…)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">命名所捕获的组. 提交一个名称到组中供后续使用，例如’(?PA[^\s]+)\s(?P=first)’ 会找到 ‘Apple Apple’. 类似的 ‘(A[^\s]+)\s\1’ 使用组名而不是数字.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?=name)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配名为name的组. (?P…).</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">(?#comment)</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">批注 –括号中的内容在匹配时将被忽略。</span></td>
+</tr></tbody></table>
+#### 3 特殊符号
+<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">符号</span></th>
+<th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">解释</span></th>
+</tr></thead><tbody><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\s</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配空格. 注意，会匹配标记的末尾. 使用 [[:blank:]] 来避免匹配新一行。</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\S</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配非空白</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\w</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配单词字符</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\W</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配非单词字符</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\d</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配数字字符</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\D</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配非数字字符</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\b</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配单词边界. ‘\bW\w+’ 找到W开头的单词</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\B</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配非单词边界. ‘\Be\B+’ – 找到位于单子中间的字母’e’</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\&lt;</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">This matches the start of a word using Scintilla’s definitions of words.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">&gt;</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">This matches the end of a word using Scintilla’s definition of words.</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">\x</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">运行用x来表达可能具有其他意思的字符。例如, [ 用来插入到文本中作为[ 而不是作为字符集的开始.</span></td>
+</tr></tbody></table>
+#### 4 字符类
+<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">符号</span></th>
+<th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">解释</span></th>
+</tr></thead><tbody><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:alpha:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配字母字符: [A-Za-z]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:digit:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配数字字符: [0-9]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:xdigit:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配16进制字符: [0-9A-Fa-f]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:alnum:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配字母数字字符: [0-9A-Za-z]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:lower:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配小写字符: [a-z]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:upper:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配大写字符: [A-Z]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:blank:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配空白 (空格 or tab):[ \t]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:space:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配空白字符:[ \t\r\n\v\f]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:punct:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配标点字符: [-!”#$%&amp;’()*+,./:;&lt;=&gt;?@[]_`{</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:graph:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配图形字符: [\x21-\x7E]</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:print:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配可打印的字符 (graphical characters and spaces)</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">[[:cntrl:]]</span></td>
+<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">匹配控制字符</span></td>
+</tr></tbody></table>
+#### 5 替换操作
+使用正则表达式的标记，通过（）来包围想要用的字符，然后用\1 来替换字符串，第一个匹配文本。
+<br>例如:
+<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">Text body</span></th>
+<th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">Search string</span></th>
+<th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">Replace string</span></th>
+<th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">Result</span></th>
+</tr></thead><tbody><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">Hi my name is Fred</span></td>
+<td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">my name is (.+)</span></td>
+<td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">my name is not \1</span></td>
+<td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">Hi my name is not Fred</span></td>
+</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">The quick brown fox jumped over the fat lazy dog</span></td>
+<td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">brown (.+) jumped over the (.+)</span></td>
+<td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">brown \2 jumped over the \1</span></td>
+<td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<span style="font-family:'Microsoft YaHei';">The quick brown fat jumped over the fox lazy dog</span></td>
+</tr></tbody></table>
+#### 6 应用举例
+##### 删除空白行的方法
+方法：
+<br>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^\s+  ,替换框留空，点“全部替换”，即可(先全选)。
+##### 删除所有行s字符开始后面的所有字符
+方法：
+<br>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^([^:]*):.*$，替换框填写$1，点“全部替换”，即可(先全选)。
+##### 批量修改一段文本
+方法：
+<br>选择替换，\r\n^\s+  用来表示换行和匹配第二行的前面所有空格
+<br>参考文档：<a>https://blog.csdn.net/wangkai_123456/article/details/55254598</a></tr></tbody></table>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/05/通过域名访问项目/" rel="next" title="通过域名访问项目">
+                <i class="fa fa-chevron-left"></i> 通过域名访问项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DMLcc</p>
+              <p class="site-description motion-element" itemprop="description">DMLcc的个人博客，主要涉及到编程（Java，Python，Linux等），个人提升学习，视频教程，《肯定会软件技术》电台节目</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本表达式"><span class="nav-number">1.</span> <span class="nav-text">1 基本表达式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DMLcc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyukU3v4q';
+      var conf = '95dfefc2ef3fc91e2d226d4f67fe154d';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
