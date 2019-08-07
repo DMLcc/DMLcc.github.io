@@ -265,7 +265,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T11:23:50+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T11:23:00+08:00">
                 2019-08-07
               </time>
             
@@ -275,6 +275,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/查找替换/" itemprop="url" rel="index">
+                    <span itemprop="name">查找替换</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -317,7 +339,7 @@
         
           
             <p>在我们处理文件时，很多时候会用到查找与替换。当我们想将文件中某一部分替换替换文件中另一部分时，怎么办呢？ 下面正则表达式 给我提供方法。<br><br>正则表达式，提供复杂并且弹性的查找与替换<br><br>工具例如：notpad++</p>
-<h4 id="1-基本表达式"><a href="#1-基本表达式" class="headerlink" title="1 基本表达式"></a>1 基本表达式</h4><table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">解释</span></th>
@@ -391,7 +413,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">非贪心匹配，匹配第一个有效的匹配，通常 ‘&lt;.&gt;’ 会匹配整个 ‘content’字符串 –但 ‘&lt;.?&gt;’ 只匹配 ” .这个标记一个标签区域，这些区域可以用语法\1 \2 等访问多个对应1-9区域。</span></td>
 </tr></tbody></table>
-#### 2 标记和分组
+<h4>2 标记和分组</h4>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -433,7 +455,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">批注 –括号中的内容在匹配时将被忽略。</span></td>
 </tr></tbody></table>
-#### 3 特殊符号
+<h4>3 特殊符号</h4>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -483,7 +505,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">运行用x来表达可能具有其他意思的字符。例如, [ 用来插入到文本中作为[ 而不是作为字符集的开始.</span></td>
 </tr></tbody></table>
-#### 4 字符类
+<h4>4 字符类</h4>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -537,7 +559,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">匹配控制字符</span></td>
 </tr></tbody></table>
-#### 5 替换操作
+<h4>5 替换操作</h4>
 使用正则表达式的标记，通过（）来包围想要用的字符，然后用\1 来替换字符串，第一个匹配文本。
 <br>例如:
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -565,14 +587,14 @@
 <td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">The quick brown fat jumped over the fox lazy dog</span></td>
 </tr></tbody></table>
-#### 6 应用举例
-##### 删除空白行的方法
+<h4>6 应用举例</h4>
+<h5>删除空白行的方法</h5>
 方法：
 <br>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^\s+  ,替换框留空，点“全部替换”，即可(先全选)。
-##### 删除所有行s字符开始后面的所有字符
+<h5>删除所有行s字符开始后面的所有字符</h5>
 方法：
 <br>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^([^:]*):.*$，替换框填写$1，点“全部替换”，即可(先全选)。
-##### 批量修改一段文本
+<h5>批量修改一段文本</h5>
 方法：
 <br>选择替换，\r\n^\s+  用来表示换行和匹配第二行的前面所有空格
 <br>参考文档：<a>https://blog.csdn.net/wangkai_123456/article/details/55254598</a></tr></tbody></table>
@@ -2151,7 +2173,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -2162,7 +2184,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
