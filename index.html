@@ -301,17 +301,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/08/07/正则表达式/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/08/07/正则表达式/" class="cy_cmt_count" data-xid="2019/08/07/正则表达式/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -323,7 +312,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -339,24 +328,7 @@
         
           
             <p>在我们处理文件时，很多时候会用到查找与替换。当我们想将文件中某一部分替换替换文件中另一部分时，怎么办呢？ 下面正则表达式 给我提供方法。<br><br>正则表达式，提供复杂并且弹性的查找与替换<br><br>工具例如：notpad++</p>
-<h4>基本表达式</h4>
-<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">符号</span></th>
-<th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">解释</span></th>
-</tr></thead><tbody><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">.</span></td>
-<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">匹配任意字符，除了新一行(\n)。也就是说 “.”可以匹配 \r ，当文件中同时含有\r and \n时，会引起混乱。要匹配所有的字符，使用\s\S。</span></td>
-</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">(…)</span></td>
-<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">这个匹配一个标签区域. 这个标签可以被访问，通过语法 \1访问第一个标签, \2 访问第二个, 同理 \3 \4 … \9。 这些标签可以用在当前正则表达式中，或则替search和replace中的换字符串。</span></td>
-</tr><tr><td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">\1, \2, etc</span></td>
-<td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
-<span style="font-family:'Microsoft YaHei';">在替换中代表1到9的标签区域(\1 to \9)。例如, 查找字符串 Fred([1-9])XXX 并替换为字符串 Sam\1YYY的方法，当在文件中找到Fred2XXX的字符串时，会替换为Sam2YYY。注意: 只有9个区域能使用，所以我们在使用时很安全，像\10\2 表示区域1和文本”0”以及区域2。</span></td>
-<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+<h4 id="基本表达式"><a href="#基本表达式" class="headerlink" title="基本表达式"></a>基本表达式</h4><table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">解释</span></th>
@@ -413,8 +385,8 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">非贪心匹配，匹配第一个有效的匹配，通常 ‘&lt;.&gt;’ 会匹配整个 ‘content’字符串 –但 ‘&lt;.?&gt;’ 只匹配 ” .这个标记一个标签区域，这些区域可以用语法\1 \2 等访问多个对应1-9区域。</span></td>
 </tr></tbody></table>
-<h4>标记和分组</h4>
-<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+
+<h4 id="标记和分组"><a href="#标记和分组" class="headerlink" title="标记和分组"></a>标记和分组</h4><table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">解释</span></th>
@@ -455,8 +427,8 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">批注 –括号中的内容在匹配时将被忽略。</span></td>
 </tr></tbody></table>
-<h4>特殊符号</h4>
-<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+
+<h4 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h4><table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">解释</span></th>
@@ -505,8 +477,8 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">运行用x来表达可能具有其他意思的字符。例如, [ 用来插入到文本中作为[ 而不是作为字符集的开始.</span></td>
 </tr></tbody></table>
-<h4>字符类</h4>
-<table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
+
+<h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">解释</span></th>
@@ -559,9 +531,8 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">匹配控制字符</span></td>
 </tr></tbody></table>
-<h4>替换操作</h4>
-使用正则表达式的标记，通过（）来包围想要用的字符，然后用\1 来替换字符串，第一个匹配文本。
-<br>例如:
+
+<h4 id="替换操作"><a href="#替换操作" class="headerlink" title="替换操作"></a>替换操作</h4><p>使用正则表达式的标记，通过（）来包围想要用的字符，然后用\1 来替换字符串，第一个匹配文本。<br><br>例如:</p>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">Text body</span></th>
 <th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -587,17 +558,11 @@
 <td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">The quick brown fat jumped over the fox lazy dog</span></td>
 </tr></tbody></table>
-<h4>应用举例</h4>
-<h5>删除空白行的方法</h5>
-方法：
-<br>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^\s+  ,替换框留空，点“全部替换”，即可(先全选)。
-<h5>删除所有行s字符开始后面的所有字符</h5>
-方法：
-<br>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^([^:]*):.*$，替换框填写$1，点“全部替换”，即可(先全选)。
-<h5>批量修改一段文本</h5>
-方法：
-<br>选择替换，\r\n^\s+  用来表示换行和匹配第二行的前面所有空格
-<br>参考文档：<a>https://blog.csdn.net/wangkai_123456/article/details/55254598</a></tr></tbody></table>
+
+<h4 id="应用举例"><a href="#应用举例" class="headerlink" title="应用举例"></a>应用举例</h4><h5 id="删除空白行的方法"><a href="#删除空白行的方法" class="headerlink" title="删除空白行的方法"></a>删除空白行的方法</h5><p>方法：<br><span>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^\s+,替换框留空，点“全部替换”，即可(先全选)。</span></p>
+<h5 id="删除所有行s字符开始后面的所有字符"><a href="#删除所有行s字符开始后面的所有字符" class="headerlink" title="删除所有行s字符开始后面的所有字符"></a>删除所有行s字符开始后面的所有字符</h5><p>方法：<br><span>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^([^:]<em>):.</em>$，替换框填写$1，点“全部替换”，即可(先全选)。</span></p>
+<h5 id="批量修改一段文本"><a href="#批量修改一段文本" class="headerlink" title="批量修改一段文本"></a>批量修改一段文本</h5><p>方法：<br><span>选择替换，\r\n^\s+  用来表示换行和匹配第二行的前面所有空格</span></p>
+<div>参考文档：<a>https://blog.csdn.net/wangkai_123456/article/details/55254598</a></div>
           
         
       
@@ -712,17 +677,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/08/05/通过域名访问项目/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/08/05/通过域名访问项目/" class="cy_cmt_count" data-xid="2019/08/05/通过域名访问项目/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -734,7 +688,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -867,17 +821,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/08/02/nginx的安装/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/08/02/nginx的安装/" class="cy_cmt_count" data-xid="2019/08/02/nginx的安装/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -889,7 +832,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -1045,17 +988,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/08/02/在linux服务器上安装Jenkins/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/08/02/在linux服务器上安装Jenkins/" class="cy_cmt_count" data-xid="2019/08/02/在linux服务器上安装Jenkins/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -1067,7 +999,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -1174,7 +1106,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/01/终于自动部署成功/" itemprop="url">终于自动部署成功</a></h1>
+                <a class="post-title-link" href="/2019/08/01/终于自动部署成功/" itemprop="url">完成自动部署项目</a></h1>
         
 
         <div class="post-meta">
@@ -1222,17 +1154,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/08/01/终于自动部署成功/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/08/01/终于自动部署成功/" class="cy_cmt_count" data-xid="2019/08/01/终于自动部署成功/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -1244,7 +1165,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -1263,6 +1184,9 @@
 其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。<br>
 预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候 http://[ip]:[jenkins的端口号]/github-webhook/ 改成了这个就是加个斜杠，成功200.我也是醉了。<br>参考的详细文档：<a>https://www.cnblogs.com/xxj0316/p/9467182.html</a><br><a>https://blog.csdn.net/weixin_43557605/article/details/95473363 </a>这篇文章就是那个少了斜杠坑我的，但是其他问题都不会出现<br><a>https://www.jianshu.com/p/8ace5eb85261</a> 这篇文档很形象的罗列了实现自动部署的方法<br>名。
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.自动部署就是自己的项目上传到github(仓库)</span><br><span class="line">2.然后github（仓库管理员）使用webhook（电话）通知Payload URL（电话号码）的主机（固定电话）</span><br><span class="line">3.这个主机（固定电话）上的jenkins（管家）会接受到提示</span><br><span class="line">4.然后去执行设定好的shell指令（就是Linux下的命令）</span><br><span class="line">5.应为我们是实现自动部署javaweb项目，容器是tomcat。</span><br><span class="line">  shell指令实现的功能有:</span><br><span class="line">  a、删除tomcat下的项目.war和文件夹。</span><br><span class="line">  b、将github传过来的javaweb压缩。</span><br><span class="line">  c、把压缩好的文件放到tomcat下，如果有需要可以修改文件</span><br></pre></td></tr></table></figure>
+
+<p>虽然垃圾简陋了点，但是我好歹把项目自动发布到了tomcat上了，我没用通过maven仓库的压缩，直接去用shell命令复制到了tomcat下。</p>
+
           
         
       
@@ -1310,7 +1234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/08/01/自动部署网站/">
+    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/08/01/测试页面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DMLcc">
@@ -1329,7 +1253,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/01/自动部署网站/" itemprop="url">自动部署网站</a></h1>
+                <a class="post-title-link" href="/2019/08/01/测试页面/" itemprop="url">测试页面</a></h1>
         
 
         <div class="post-meta">
@@ -1377,17 +1301,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/08/01/自动部署网站/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/08/01/自动部署网站/" class="cy_cmt_count" data-xid="2019/08/01/自动部署网站/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -1399,7 +1312,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -1414,7 +1327,7 @@
       
         
           
-            <p>虽然垃圾简陋了点，但是我好歹把项目自动发布到了tomcat上了，我没用通过maven仓库的压缩，直接去用shell命令复制到了tomcat下，所以很low。现在这个页面是测试的。</p>
+            <p><img src="/images/ccc.png?v=5.1.4" alt="我的图片" title="我的图图片"><br>读取的是public下的image</p>
 
           
         
@@ -1508,17 +1421,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/07/31/把项目push到github上/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/07/31/把项目push到github上/" class="cy_cmt_count" data-xid="2019/07/31/把项目push到github上/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -1530,7 +1432,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -1545,8 +1447,8 @@
       
         
           
-            <p>这就是一张测试页面</p>
-
+            <h4 id="在本地cmd：cd-到仓库目录-使用命令"><a href="#在本地cmd：cd-到仓库目录-使用命令" class="headerlink" title="在本地cmd：cd 到仓库目录 使用命令"></a>在本地cmd：cd 到仓库目录 使用命令</h4><pre><code>hexo d</code></pre><p>若未文件数量未产生变化，将提示，并且不会被push到github上</p>
+<h4 id="在admin编辑器下则使用发布功能-无论是否修改，都会被push到github上"><a href="#在admin编辑器下则使用发布功能-无论是否修改，都会被push到github上" class="headerlink" title="在admin编辑器下则使用发布功能 -无论是否修改，都会被push到github上"></a>在admin编辑器下则使用发布功能 -无论是否修改，都会被push到github上</h4><pre><code>参考文章：https://www.jianshu.com/p/e542bea49c88</code></pre>
           
         
       
@@ -1613,7 +1515,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/17/NewWorld/" itemprop="url">NewWorld</a></h1>
+                <a class="post-title-link" href="/2019/07/17/NewWorld/" itemprop="url">Markdown的语法说明</a></h1>
         
 
         <div class="post-meta">
@@ -1659,18 +1561,7 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/教程1/" itemprop="url" rel="index">
-                    <span itemprop="name">教程1</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/教程1/教程/" itemprop="url" rel="index">
+                  <a href="/categories/个人网站/教程/" itemprop="url" rel="index">
                     <span itemprop="name">教程</span>
                   </a>
                 </span>
@@ -1683,17 +1574,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/07/17/NewWorld/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/07/17/NewWorld/" class="cy_cmt_count" data-xid="2019/07/17/NewWorld/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -1705,7 +1585,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -1720,17 +1600,12 @@
       
         
           
-            <p>Welcome to This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.这是一张复制下来的测试页面。</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我没猜错的话 <span class="string">'#'</span> 是标题符号</span><br></pre></td></tr></table></figure>
+            <p>hexo Admin 的页面编写是采用Markdown语法的，当然你也可以使用HTML5语法，但是语法兼容不代表js就兼容。所以尽量使用Markdown语法来编写页面。在不使用js地方随意使用什么语法。在页面上显示的时候也是按HTML的标签显示。</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以代替tab键</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">Markdown 语法说明</a><br>这个是写页面的语法类似于html语法</p>
-<h3 id="标签和分类"><a href="#标签和分类" class="headerlink" title="标签和分类"></a>标签和分类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我没猜错的话 <span class="string">'#'</span> 是标题符号</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://blog.csdn.net/qq_42247008/article/details/85003789" target="_blank" rel="noopener">参考</a><br>在写tags和categories的类别时，需要用空格而不是tab键</p>
-<h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我没猜错的话 <span class="string">'#'</span> 是标题符号</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://changyan.kuaizhan.com/" target="_blank" rel="noopener">参考</a><br>用的是畅言的appkey 和 appid</p>
-<p>貌似这个必须有三个子项，右侧搜索栏里才能自动出现标号</p>
+<h3 id="标签和分类"><a href="#标签和分类" class="headerlink" title="标签和分类"></a>标签和分类</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用tab键代替</span><br></pre></td></tr></table></figure></code></pre><p>More info: <a href="https://blog.csdn.net/qq_42247008/article/details/85003789" target="_blank" rel="noopener">参考</a><br>在写tags和categories的类别时，需要用空格而不是tab键</p>
+<h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>More info: <a href="https://changyan.kuaizhan.com/" target="_blank" rel="noopener">参考</a><br>用的是畅言的appkey 和 appid</p>
 
           
         
@@ -1798,7 +1673,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/17/来写/" itemprop="url">用admin页面来写</a></h1>
+                <a class="post-title-link" href="/2019/07/17/来写/" itemprop="url">Markdown基本语法</a></h1>
         
 
         <div class="post-meta">
@@ -1833,8 +1708,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程1/" itemprop="url" rel="index">
-                    <span itemprop="name">教程1</span>
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
                   </a>
                 </span>
 
@@ -1846,17 +1721,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/07/17/来写/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/07/17/来写/" class="cy_cmt_count" data-xid="2019/07/17/来写/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -1868,7 +1732,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -1883,18 +1747,150 @@
       
         
           
-            <p>难道左边的是效果吗</p>
-<p>##11111</p>
-<h2 id="qwewqe"><a href="#qwewqe" class="headerlink" title="qwewqe"></a>qwewqe</h2><h1 id="weqwe"><a href="#weqwe" class="headerlink" title="weqwe"></a>weqwe</h1><hr>
-<p>用mark语言的时候要记得空格哦</p>
-<h2>这也是h2</h2>
-<span>这个好像就是纯html写的<span>
-<font color="#FF0000">我是红色字体</font>
+            <p>Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。<br>相比WYSIWYG编辑器<br>优点：<br>1、因为是纯文本，所以只要支持Markdown的地方都能获得一样的编辑效果，可以让作者摆脱排版的困扰，专心写作。<br>2、操作简单。比如:WYSIWYG编辑时标记个标题，先选中内容，再点击导航栏的标题按钮，选择几级标题。要三个步骤。而Markdown只需要在标题内容前加#即可<br>缺点：<br>1、需要记一些语法（当然，是很简单。五分钟学会）。<br>2、有些平台不支持Markdown编辑模式。</p>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>在想要设置为标题的文字前面加#来表示<br>一个#是一级标题，二个#是二级标题，以此类推。支持六级标题。</p>
+<p>注：标准语法一般在#后跟个空格再写文字。</p>
+<pre><code># 这是一级标题
+## 这是二级标题
+### 这是三级标题
+#### 这是四级标题
+##### 这是五级标题
+###### 这是六级标题</code></pre><h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p>加粗<br>要加粗的文字左右分别用两个*号包起来</p>
+<p>斜体<br>要倾斜的文字左右分别用一个*号包起来</p>
+<p>斜体加粗<br>要倾斜和加粗的文字左右分别用三个*号包起来</p>
+<p>删除线<br>要加删除线的文字左右分别用两个~~号包起来</p>
+<pre><code>**这是加粗的文字**
+*这是倾斜的文字*`
+***这是斜体加粗的文字***
+~~这是加删除线的文字~~</code></pre><p>效果如下：</p>
+<p><strong>这是加粗的文字</strong></p>
+<p><em>这是倾斜的文字</em></p>
+<p><strong><em>这是斜体加粗的文字</em></strong></p>
+<p><del>这是加删除线的文字</del></p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;<br>n个…<br>貌似可以一直加下去，但没神马卵用</p>
+<p>示例：</p>
+<pre><code>&gt;这是引用的内容
+&gt;&gt;这是引用的内容
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</code></pre><p>效果如下：</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这是引用的内容</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>三个或者三个以上的 - 或者 * 都可以。</p>
+<p>示例：</p>
+<pre><code>---
+----
+***
+*****</code></pre><p>效果如下：<br>可以看到，显示效果是一样的。</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>语法：</p>
+<pre><code>![图片alt](图片地址 &apos;&apos;图片title&apos;&apos;)图片alt就是显示在图片下面的文字，相当于对图片内容的解释。图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</code></pre><p>示例：</p>
+<pre><code>![blockchain](https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&amp;fm=27&amp;gp=0.jpg &quot;区块链&quot;)</code></pre><p>效果如下：</p>
+<p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&fm=27&gp=0.jpg" alt="blockchain" title="区块链"></p>
+<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><p>语法：</p>
+<pre><code>[超链接名](超链接地址 &quot;超链接title&quot;)
+title可加可不加</code></pre><p>示例：</p>
+<pre><code>[简书](http://jianshu.com)
+[百度](http://baidu.com)</code></pre><p>效果如下：</p>
+<p><a href="http://jianshu.com" target="_blank" rel="noopener">简书</a><br><a href="http://baidu.com" target="_blank" rel="noopener">百度</a></p>
+<p>注：Markdown本身语法不支持链接在新页面中打开，如果想要在新页面中打开的话可以用html语言的a标签代替。</p>
+<p>示例：</p>
+<pre><code>&lt;a href=&quot;超链接地址&quot; target=&quot;_blank&quot;&gt;超链接名&lt;/a&gt;</code></pre><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>无序列表<br>语法：<br>无序列表用 - + * 任何一种都可以</p>
+<pre><code>- 列表内容
++ 列表内容
+* 列表内容</code></pre><p>注意：- + * 跟内容之间都要有一个空格</p>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<p>有序列表<br>语法：<br>数字加点</p>
+<pre><code>1.列表内容
+2.列表内容
+3.列表内容</code></pre><p>注意：序号跟内容之间要有空格<br>效果如下：<br>1.列表内容<br>2.列表内容<br>3.列表内容</p>
+<p>列表嵌套</p>
+<p>上一级和下一级之间敲三个空格即可</p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>语法：</p>
+<pre><code>表头|表头|表头
+---|:--:|---:
+内容|内容|内容
+内容|内容|内容</code></pre><p>第二行分割表头和内容。</p>
+<ul>
+<li>有一个就行，为了对齐，多加了几个<br>文字默认居左</li>
+<li>两边加：表示文字居中</li>
+<li>右边加：表示文字居右<br>注：原生的语法两边都要用 | 包起来。此处省略</li>
+</ul>
+<p>示例：</p>
+<pre><code>姓名|技能|排行
+--|:--:|--:
+刘备|哭|大哥
+关羽|打|二哥
+张飞|骂|三弟</code></pre><p>效果如下：</p>
 <table>
-    <tr>
-        <td>这是一个段落哦</td>
-    </tr>
-</table></span></span>
+<thead>
+<tr>
+<th>姓名</th>
+<th align="center">技能</th>
+<th align="right">排行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>刘备</td>
+<td align="center">哭</td>
+<td align="right">大哥</td>
+</tr>
+<tr>
+<td>关羽</td>
+<td align="center">打</td>
+<td align="right">二哥</td>
+</tr>
+<tr>
+<td>张飞</td>
+<td align="center">骂</td>
+<td align="right">三弟</td>
+</tr>
+</tbody></table>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>语法：<br>单行代码：代码之间分别用一个反引号包起来</p>
+<pre><code>`代码内容`</code></pre><p>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">代码...</span><br><span class="line">代码...</span><br><span class="line">代码...</span><br></pre></td></tr></table></figure></code></pre><p>注：为了防止转译，前后三个反引号处加了小括号，实际是没有的。这里只是用来演示，实际中去掉两边小括号即可。</p>
+<p>示例：</p>
+<p>单行代码</p>
+<pre><code>`create database hero;`</code></pre><p>代码块</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure></code></pre><p>效果如下：</p>
+<p>单行代码</p>
+<p><code>create database hero;</code></p>
+<p>代码块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
+
+<p>参考链接：<a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></p>
+<p><a href="https://www.appinn.com/markdown/#precode" target="_blank" rel="noopener">参考文档</a>：<a href="https://www.appinn.com/markdown/#precode" target="_blank" rel="noopener">https://www.appinn.com/markdown/#precode</a></p>
+
           
         
       
@@ -2053,17 +2049,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2019/07/16/hello-world/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.dmlcc.cn/2019/07/16/hello-world/" class="cy_cmt_count" data-xid="2019/07/16/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -2075,7 +2060,7 @@
 
           
 
-        </span></div>
+        </div>
       </header>
     
 
@@ -2195,7 +2180,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -2206,7 +2191,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -2394,10 +2379,6 @@
 
 
 
-
-  
-    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyukU3v4q"></script>
-  
 
 
 
