@@ -339,6 +339,7 @@
         
           
             <p>在我们处理文件时，很多时候会用到查找与替换。当我们想将文件中某一部分替换替换文件中另一部分时，怎么办呢？ 下面正则表达式 给我提供方法。<br><br>正则表达式，提供复杂并且弹性的查找与替换<br><br>工具例如：notpad++</p>
+<h4>基本表达式</h4>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -355,7 +356,6 @@
 <span style="font-family:'Microsoft YaHei';">\1, \2, etc</span></td>
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">在替换中代表1到9的标签区域(\1 to \9)。例如, 查找字符串 Fred([1-9])XXX 并替换为字符串 Sam\1YYY的方法，当在文件中找到Fred2XXX的字符串时，会替换为Sam2YYY。注意: 只有9个区域能使用，所以我们在使用时很安全，像\10\2 表示区域1和文本”0”以及区域2。</span></td>
-### 1 基本表达式
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -413,7 +413,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">非贪心匹配，匹配第一个有效的匹配，通常 ‘&lt;.&gt;’ 会匹配整个 ‘content’字符串 –但 ‘&lt;.?&gt;’ 只匹配 ” .这个标记一个标签区域，这些区域可以用语法\1 \2 等访问多个对应1-9区域。</span></td>
 </tr></tbody></table>
-<h4>2 标记和分组</h4>
+<h4>标记和分组</h4>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -455,7 +455,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">批注 –括号中的内容在匹配时将被忽略。</span></td>
 </tr></tbody></table>
-<h4>3 特殊符号</h4>
+<h4>特殊符号</h4>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -505,7 +505,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">运行用x来表达可能具有其他意思的字符。例如, [ 用来插入到文本中作为[ 而不是作为字符集的开始.</span></td>
 </tr></tbody></table>
-<h4>4 字符类</h4>
+<h4>字符类</h4>
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">符号</span></th>
 <th align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -559,7 +559,7 @@
 <td align="left" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">匹配控制字符</span></td>
 </tr></tbody></table>
-<h4>5 替换操作</h4>
+<h4>替换操作</h4>
 使用正则表达式的标记，通过（）来包围想要用的字符，然后用\1 来替换字符串，第一个匹配文本。
 <br>例如:
 <table style="border-collapse:collapse;border-spacing:0px;border:1px solid rgb(238,238,238);color:rgb(85,85,85);font-size:14px;"><thead><tr><th align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
@@ -587,7 +587,7 @@
 <td align="center" style="line-height:20px;vertical-align:top;border:1px solid rgb(238,238,238);">
 <span style="font-family:'Microsoft YaHei';">The quick brown fat jumped over the fox lazy dog</span></td>
 </tr></tbody></table>
-<h4>6 应用举例</h4>
+<h4>应用举例</h4>
 <h5>删除空白行的方法</h5>
 方法：
 <br>选择替换，把查找模式设置为正则表达式，在查找框中输入 ^\s+  ,替换框留空，点“全部替换”，即可(先全选)。
