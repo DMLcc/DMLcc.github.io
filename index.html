@@ -234,6 +234,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/08/12/mysql编码引发的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DMLcc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DMLcc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/12/mysql编码引发的问题/" itemprop="url">mysql编码引发的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-12T10:14:00+08:00">
+                2019-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人网站/" itemprop="url" rel="index">
+                    <span itemprop="name">个人网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题"><a href="#关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题" class="headerlink" title="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题"></a>关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题</h4><p>通常这种问题出现在新装的mysql中，也都是编码问题，有些显而易见会直接中文乱码，而有写是只有看配置信息才能判断。</p>
+<p>如果可以就直接看服务器端的报错信息，若还是无法看出问题可尝试以下方法：    </p>
+<p>1.第一点要确认的是本地的项目使用mysql语句，断点观察连接本地数据库语句是否可以成功执行。若可以打开可执行第二步，否则问题出在连接数据库配置信息问题。异常一般会显示关闭数据库连接时空指针。</p>
+<p>2.第二点要确认服务器端的mysql的库是否创建好，就直接通过本地的mysql直接通过ip加端口访问服务器端的mysql。若可以打开可执行第三步，否则问题出在服务器端的数据库问题。</p>
+<p>3.第三点要确认的是服务器端的mysql数据库和表的编码。本地数据库和服务器端的数据库都执行以下代码。若出现本地和服务器端编码不同，建议服务器端编码按照本地的修改（若本地用的不是utf-8，建议都使用utf-8）。将本地和服务器端编码统一后，可执行第四步。注意：我遇到这个问题时，是因为没有统一服务器端mysql的编码，我只是统一了服务器端的编码，并没有和本地的编码一样。详细可看下图</p>
+<p>查看数据库的编码格式</p>
+<pre><code>show variables like &apos;%char%&apos;;</code></pre><p>设置数据库db_name默认为utf8:</p>
+<pre><code>ALTER DATABASE `db_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</code></pre><p>设置表tb_name默认编码为utf8:</p>
+<pre><code>ALTER TABLE `tb_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</code></pre><p><img src="/load/serverpic.png?v=5.1.4" alt="我的服务器端编码" title="我的服务器端编码"><br><img src="/load/clientpic.png?v=5.1.4" alt="我的本地端编码" title="我的本地端编码"></p>
+<p>4.第四步是在本地项目上连接服务器端的mysql，即将本地的连接本地数据库语句改成连接远程服务器数据库语句。跑一下项目，若是在本地可以那服务器端应该也可以，若服务器端还是不行，那就不是mysql编码的原因。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/08/07/正则表达式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1904,207 +2055,13 @@ title可加可不加</code></pre><p>示例：</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/07/16/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DMLcc">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DMLcc">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/16/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T17:06:23+08:00">
-                2019-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/" itemprop="url" rel="index">
-                    <span itemprop="name">个人网站</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/教程1/" itemprop="url" rel="index">
-                    <span itemprop="name">教程1</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/教程1/教程2/" itemprop="url" rel="index">
-                    <span itemprop="name">教程2</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/教程1/教程2/教程3/" itemprop="url" rel="index">
-                    <span itemprop="name">教程3</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/教程1/教程2/教程3/教程4/" itemprop="url" rel="index">
-                    <span itemprop="name">教程4</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2148,7 +2105,7 @@ title可加可不加</code></pre><p>示例：</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2170,7 +2127,7 @@ title可加可不加</code></pre><p>示例：</p>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

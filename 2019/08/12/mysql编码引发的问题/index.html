@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="nginx,">
+  <meta name="keywords" content="tomcat,mysql,">
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="windows版本1.下载nginx http://nginx.org/en/download.html         下载稳定版本，以nginx/Windows-1.12.2为例，直接下载 nginx-1.12.2.zip 下载后解压，解压后如下 2.启动nginx 有很多种方法启动nginx (1)直接双击nginx.exe，双击后一个黑色的弹窗一闪而过 (2)打开cmd命令窗口，切换到ng">
-<meta name="keywords" content="nginx">
+<meta name="description" content="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题通常这种问题出现在新装的mysql中，也都是编码问题，有些显而易见会直接中文乱码，而有写是只有看配置信息才能判断。 如果可以就直接看服务器端的报错信息，若还是无法看出问题可尝试以下方法：     1.第一点要确认的是本地的项目使用mysql语句，断点观察连接本地数据库语句是否可以成功执行。若可以打开可执行第二步，否">
+<meta name="keywords" content="tomcat,mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx的安装">
-<meta property="og:url" content="http://www.dmlcc.cn/2019/08/02/nginx的安装/index.html">
+<meta property="og:title" content="mysql编码引发的问题">
+<meta property="og:url" content="http://www.dmlcc.cn/2019/08/12/mysql编码引发的问题/index.html">
 <meta property="og:site_name" content="DMLcc">
-<meta property="og:description" content="windows版本1.下载nginx http://nginx.org/en/download.html         下载稳定版本，以nginx/Windows-1.12.2为例，直接下载 nginx-1.12.2.zip 下载后解压，解压后如下 2.启动nginx 有很多种方法启动nginx (1)直接双击nginx.exe，双击后一个黑色的弹窗一闪而过 (2)打开cmd命令窗口，切换到ng">
+<meta property="og:description" content="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题通常这种问题出现在新装的mysql中，也都是编码问题，有些显而易见会直接中文乱码，而有写是只有看配置信息才能判断。 如果可以就直接看服务器端的报错信息，若还是无法看出问题可尝试以下方法：     1.第一点要确认的是本地的项目使用mysql语句，断点观察连接本地数据库语句是否可以成功执行。若可以打开可执行第二步，否">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-08-02T07:27:49.059Z">
+<meta property="og:image" content="http://www.dmlcc.cn/load/serverpic.png?v=5.1.4">
+<meta property="og:image" content="http://www.dmlcc.cn/load/clientpic.png?v=5.1.4">
+<meta property="og:updated_time" content="2019-08-12T02:24:42.799Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx的安装">
-<meta name="twitter:description" content="windows版本1.下载nginx http://nginx.org/en/download.html         下载稳定版本，以nginx/Windows-1.12.2为例，直接下载 nginx-1.12.2.zip 下载后解压，解压后如下 2.启动nginx 有很多种方法启动nginx (1)直接双击nginx.exe，双击后一个黑色的弹窗一闪而过 (2)打开cmd命令窗口，切换到ng">
+<meta name="twitter:title" content="mysql编码引发的问题">
+<meta name="twitter:description" content="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题通常这种问题出现在新装的mysql中，也都是编码问题，有些显而易见会直接中文乱码，而有写是只有看配置信息才能判断。 如果可以就直接看服务器端的报错信息，若还是无法看出问题可尝试以下方法：     1.第一点要确认的是本地的项目使用mysql语句，断点观察连接本地数据库语句是否可以成功执行。若可以打开可执行第二步，否">
+<meta name="twitter:image" content="http://www.dmlcc.cn/load/serverpic.png?v=5.1.4">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://www.dmlcc.cn/2019/08/02/nginx的安装/">
+  <link rel="canonical" href="http://www.dmlcc.cn/2019/08/12/mysql编码引发的问题/">
 
 
 
 
 
-  <title>nginx的安装 | DMLcc</title>
+  <title>mysql编码引发的问题 | DMLcc</title>
   
 
 
@@ -234,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/08/02/nginx的安装/">
+    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/08/12/mysql编码引发的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DMLcc">
@@ -251,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nginx的安装</h1>
+          <h1 class="post-title" itemprop="name headline">mysql编码引发的问题</h1>
         
 
         <div class="post-meta">
@@ -263,8 +266,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-02T15:20:00+08:00">
-                2019-08-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-12T10:14:00+08:00">
+                2019-08-12
               </time>
             
 
@@ -323,33 +326,17 @@
       
 
       
-        <h3 id="windows版本"><a href="#windows版本" class="headerlink" title="windows版本"></a>windows版本</h3><p>1.下载nginx</p>
-<p><a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a>         下载稳定版本，以nginx/Windows-1.12.2为例，直接下载 nginx-1.12.2.zip</p>
-<p>下载后解压，解压后如下</p>
-<p>2.启动nginx</p>
-<p>有很多种方法启动nginx</p>
-<p>(1)直接双击nginx.exe，双击后一个黑色的弹窗一闪而过</p>
-<p>(2)打开cmd命令窗口，切换到nginx解压目录下，输入命令 nginx.exe 或者 start nginx ，回车即可</p>
-<p>3.检查nginx是否启动成功</p>
-<p>直接在浏览器地址栏输入网址 <a href="http://localhost:80，回车，出现以下页面说明启动成功" target="_blank" rel="noopener">http://localhost:80，回车，出现以下页面说明启动成功</a></p>
-<p>也可以在cmd命令窗口输入命令 tasklist /fi “imagename eq nginx.exe” ，出现如下结果说明启动成功</p>
-<p>nginx的配置文件是conf目录下的nginx.conf，默认配置的nginx监听的端口为80，如果80端口被占用可以修改为未被占用的端口即可</p>
-<p>检查80端口是否被占用的命令是： netstat -ano | findstr 0.0.0.0:80 或 netstat -ano | findstr “80”</p>
-<p>当我们修改了nginx的配置文件nginx.conf 时，不需要关闭nginx后重新启动nginx，只需要执行命令 nginx -s reload 即可让改动生效</p>
-<p>4.关闭nginx</p>
-<p>如果使用cmd命令窗口启动nginx，关闭cmd窗口是不能结束nginx进程的，可使用两种方法关闭nginx</p>
-<p>(1)输入nginx命令  nginx -s stop(快速停止nginx)  或  nginx -s quit(完整有序的停止nginx)</p>
-<p>(2)使用taskkill   taskkill /f /t /im nginx.exe</p>
-<p>5.使用nginx代理服务器做负载均衡</p>
-<p>我们可以修改nginx的配置文件nginx.conf 达到访问nginx代理服务器时跳转到指定服务器的目的，即通过proxy_pass 配置请求转发地址，即当我们依然输入<a href="http://localhost:80" target="_blank" rel="noopener">http://localhost:80</a> 时，请求会跳转到我们配置的服务器</p>
-<p>同理，我们可以配置多个目标服务器，当一台服务器出现故障时，nginx能将请求自动转向另一台服务器，例如配置如下：</p>
-<p>当服务器 localhost:8080 挂掉时，nginxnginx能将请求自动转向服务器 192.168.101.9:8080 。上面还加了一个weight属性，此属性表示各服务器被访问到的权重，weight</p>
-<p>越高被访问到的几率越高。</p>
-<p>6.nginx配置静态资源</p>
-<p> 将静态资源（如jpg|png|css|js等）放在如下配置的f:/nginx-1.12.2/static目录下，然后在nginx配置文件中做如下配置(注意：静态资源配置只能放在 location / 中)，浏览器中访问  <a href="http://localhost:80/1.png" target="_blank" rel="noopener">http://localhost:80/1.png</a> 即可访问到 f:/nginx-1.12.2/static目录下的 1.png图片</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">参考文档-安装即使用：https://www.cnblogs.com/jiangwangxiang/p/8481661.html</span><br><span class="line">参考文档-安装：https://www.cnblogs.com/taiyonghai/p/9402734.html</span><br><span class="line">参考文档-http配置：https://www.cnblogs.com/luxiaoyao/p/10034009.html</span><br></pre></td></tr></table></figure>
+        <h4 id="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题"><a href="#关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题" class="headerlink" title="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题"></a>关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题</h4><p>通常这种问题出现在新装的mysql中，也都是编码问题，有些显而易见会直接中文乱码，而有写是只有看配置信息才能判断。</p>
+<p>如果可以就直接看服务器端的报错信息，若还是无法看出问题可尝试以下方法：    </p>
+<p>1.第一点要确认的是本地的项目使用mysql语句，断点观察连接本地数据库语句是否可以成功执行。若可以打开可执行第二步，否则问题出在连接数据库配置信息问题。异常一般会显示关闭数据库连接时空指针。</p>
+<p>2.第二点要确认服务器端的mysql的库是否创建好，就直接通过本地的mysql直接通过ip加端口访问服务器端的mysql。若可以打开可执行第三步，否则问题出在服务器端的数据库问题。</p>
+<p>3.第三点要确认的是服务器端的mysql数据库和表的编码。本地数据库和服务器端的数据库都执行以下代码。若出现本地和服务器端编码不同，建议服务器端编码按照本地的修改（若本地用的不是utf-8，建议都使用utf-8）。将本地和服务器端编码统一后，可执行第四步。注意：我遇到这个问题时，是因为没有统一服务器端mysql的编码，我只是统一了服务器端的编码，并没有和本地的编码一样。详细可看下图</p>
+<p>查看数据库的编码格式</p>
+<pre><code>show variables like &apos;%char%&apos;;</code></pre><p>设置数据库db_name默认为utf8:</p>
+<pre><code>ALTER DATABASE `db_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</code></pre><p>设置表tb_name默认编码为utf8:</p>
+<pre><code>ALTER TABLE `tb_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</code></pre><p><img src="/load/serverpic.png?v=5.1.4" alt="我的服务器端编码" title="我的服务器端编码"><br><img src="/load/clientpic.png?v=5.1.4" alt="我的本地端编码" title="我的本地端编码"></p>
+<p>4.第四步是在本地项目上连接服务器端的mysql，即将本地的连接本地数据库语句改成连接远程服务器数据库语句。跑一下项目，若是在本地可以那服务器端应该也可以，若服务器端还是不行，那就不是mysql编码的原因。</p>
 
-<h3 id="Linux版本"><a href="#Linux版本" class="headerlink" title="Linux版本"></a>Linux版本</h3>
       
     </div>
     
@@ -366,7 +353,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
+            <a href="/tags/tomcat/" rel="tag"># tomcat</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
         </div>
       
@@ -379,8 +368,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/02/在linux服务器上安装Jenkins/" rel="next" title="在linux服务器上安装Jenkins">
-                <i class="fa fa-chevron-left"></i> 在linux服务器上安装Jenkins
+              <a href="/2019/08/07/正则表达式/" rel="next" title="NotePad++ 正则表达式">
+                <i class="fa fa-chevron-left"></i> NotePad++ 正则表达式
               </a>
             
           </div>
@@ -388,10 +377,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/05/通过域名访问项目/" rel="prev" title="通过域名访问项目">
-                通过域名访问项目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -528,7 +513,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows版本"><span class="nav-number">1.</span> <span class="nav-text">windows版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux版本"><span class="nav-number">2.</span> <span class="nav-text">Linux版本</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题"><span class="nav-number">1.</span> <span class="nav-text">关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题</span></a></li></ol></div>
             
 
           </div>
