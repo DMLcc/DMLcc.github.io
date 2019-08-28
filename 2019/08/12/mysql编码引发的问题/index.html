@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="http://www.dmlcc.cn/load/serverpic.png?v=5.1.4">
 <meta property="og:image" content="http://www.dmlcc.cn/load/clientpic.png?v=5.1.4">
-<meta property="og:updated_time" content="2019-08-12T02:24:42.799Z">
+<meta property="og:updated_time" content="2019-08-12T02:39:55.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql编码引发的问题">
 <meta name="twitter:description" content="关于mysql在本地tomcat中可以，但是在服务器端的tomcat中无法执行的问题通常这种问题出现在新装的mysql中，也都是编码问题，有些显而易见会直接中文乱码，而有写是只有看配置信息才能判断。 如果可以就直接看服务器端的报错信息，若还是无法看出问题可尝试以下方法：     1.第一点要确认的是本地的项目使用mysql语句，断点观察连接本地数据库语句是否可以成功执行。若可以打开可执行第二步，否">
@@ -335,6 +335,7 @@
 <pre><code>show variables like &apos;%char%&apos;;</code></pre><p>设置数据库db_name默认为utf8:</p>
 <pre><code>ALTER DATABASE `db_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</code></pre><p>设置表tb_name默认编码为utf8:</p>
 <pre><code>ALTER TABLE `tb_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</code></pre><p><img src="/load/serverpic.png?v=5.1.4" alt="我的服务器端编码" title="我的服务器端编码"><br><img src="/load/clientpic.png?v=5.1.4" alt="我的本地端编码" title="我的本地端编码"></p>
+<p><a href="https://www.cnblogs.com/jpfss/p/7881836.html" target="_blank" rel="noopener">mysql如何更改character-set-server默认为latin1</a></p>
 <p>4.第四步是在本地项目上连接服务器端的mysql，即将本地的连接本地数据库语句改成连接远程服务器数据库语句。跑一下项目，若是在本地可以那服务器端应该也可以，若服务器端还是不行，那就不是mysql编码的原因。</p>
 
       
@@ -377,6 +378,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/28/谷歌服务的使用/" rel="prev" title="谷歌服务的使用">
+                谷歌服务的使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -458,7 +463,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -469,7 +474,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -480,7 +485,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
