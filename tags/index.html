@@ -11,7 +11,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
-
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                window.history.back();
+            }
+        }
+    })();
+</script>
 
 
 
@@ -79,18 +88,18 @@
 
 
 
-<meta name="description" content="title: tagdate: 2019-7-16 19:49:50type: “tag”comments: false">
+<meta name="description" content="小帆的个人博客，主要涉及到编程（Java，Python，Linux等），个人提升学习">
 <meta name="keywords" content="java，python，oracle，教程，经验">
 <meta property="og:type" content="website">
-<meta property="og:title" content="DMLcc">
+<meta property="og:title" content="tags">
 <meta property="og:url" content="http://www.dmlcc.cn/tags/index.html">
 <meta property="og:site_name" content="DMLcc">
-<meta property="og:description" content="title: tagdate: 2019-7-16 19:49:50type: “tag”comments: false">
+<meta property="og:description" content="小帆的个人博客，主要涉及到编程（Java，Python，Linux等），个人提升学习">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-07-17T12:02:23.866Z">
+<meta property="og:updated_time" content="2019-09-24T13:44:48.531Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DMLcc">
-<meta name="twitter:description" content="title: tagdate: 2019-7-16 19:49:50type: “tag”comments: false">
+<meta name="twitter:title" content="tags">
+<meta name="twitter:description" content="小帆的个人博客，主要涉及到编程（Java，Python，Linux等），个人提升学习">
 
 
 
@@ -126,7 +135,7 @@
 
 
 
-  <title> | DMLcc</title>
+  <title>tags | DMLcc</title>
   
 
 
@@ -192,6 +201,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -227,7 +256,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline"></h1>
+	<h1 class="post-title" itemprop="name headline">tags</h1>
 
 
 
@@ -239,8 +268,14 @@
       <div class="post-body">
         
         
-          <p>title: tag<br>date: 2019-7-16 19:49:50<br>type: “tag”<br>comments: false</p>
-
+          <div class="tag-cloud">
+            <div class="tag-cloud-title">
+                14 tags in total
+            </div>
+            <div class="tag-cloud-tags">
+              <a href="/tags/Markdown/" style="font-size: 30px; color: #111">Markdown</a> <a href="/tags/github/" style="font-size: 12px; color: #ccc">github</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/jenkins/" style="font-size: 30px; color: #111">jenkins</a> <a href="/tags/mysql/" style="font-size: 12px; color: #ccc">mysql</a> <a href="/tags/nginx/" style="font-size: 12px; color: #ccc">nginx</a> <a href="/tags/tomcat/" style="font-size: 30px; color: #111">tomcat</a> <a href="/tags/vpn/" style="font-size: 12px; color: #ccc">vpn</a> <a href="/tags/个人网站/" style="font-size: 12px; color: #ccc">个人网站</a> <a href="/tags/域名/" style="font-size: 12px; color: #ccc">域名</a> <a href="/tags/教程/" style="font-size: 12px; color: #ccc">教程</a> <a href="/tags/查找替换/" style="font-size: 12px; color: #ccc">查找替换</a> <a href="/tags/正则表达式/" style="font-size: 12px; color: #ccc">正则表达式</a> <a href="/tags/谷歌服务/" style="font-size: 12px; color: #ccc">谷歌服务</a>
+            </div>
+          </div>
         
       </div>
       
@@ -305,7 +340,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -315,10 +350,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
-                
+                </a>
               </div>
             
 
@@ -326,10 +361,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 
