@@ -543,6 +543,240 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/11/18/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DMLcc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DMLcc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/18/1/" itemprop="url">冷静对待你遇到的所有Java内存异常</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-18T16:32:53+08:00">
+                2019-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/11/18/1/" class="leancloud_visitors" data-flag-title="冷静对待你遇到的所有Java内存异常">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="被人说烂的Java内存模型"><a href="#被人说烂的Java内存模型" class="headerlink" title="被人说烂的Java内存模型"></a>被人说烂的Java内存模型</h4><p>Java内存模型的相关资料在网上实在是太多了,不管是过时的还是不过时的,网络上充斥的学习资料,比如各类研究Java内存模型的博文,也随着Java的发展,渐渐失去了其内容的准确性.</p>
+<p>要在那么多网络资料中找到对Java内存模型最新最全的说法,估计最好的方式只有翻阅Oracle的文档了!(字体大小太不舒服了!)</p>
+<p>我最近也不停的查阅和总结了不少网上的资料,不过由于类似资料实在太多,所以不打算重复的说明这个被人说烂的Java内存模型</p>
+<h4 id="从各种OOM异常出发来零距离的理解Java内存模型"><a href="#从各种OOM异常出发来零距离的理解Java内存模型" class="headerlink" title="从各种OOM异常出发来零距离的理解Java内存模型"></a>从各种OOM异常出发来零距离的理解Java内存模型</h4><p>对于大脑来说, 大脑更喜欢问题, 而不是从陈述开始.</p>
+<p>本文会从平时工作中可能会遇到的OOM异常出发,来一步步的深入理解我们所熟知的Java内存模型,从而哪怕可以更加理解一点这些方面的编程思想和设计精髓, 也是一个不小的进步</p>
+<h4 id="java-lang-StackOverFlowError"><a href="#java-lang-StackOverFlowError" class="headerlink" title="java.lang.StackOverFlowError"></a>java.lang.StackOverFlowError</h4><ul>
+<li><p>这个Stack是什么鬼东西</p>
+<p>Stack是个栈, 是一种数据结构, 会占用一块内存空间</p>
+</li>
+<li><p>Java在哪些地方会使用Stack来存储数据</p>
+<ol>
+<li><p>最常见的就是虚拟机栈, 它是专门为java Method执行服务的一块内存, 每个方法调用都会往这个栈中压入一个栈帧(stackFrame), 由于方法可以互调,迭代,所以使用栈模型来服务Java Method是很适合的一种数据结构模型</p>
+</li>
+<li><p>别忘了还有一个本地方法栈, 它是专门为java的底层native方法执行服务的一块内存. 然而由于native方法都是术语jdk内部的测试稳定的程序,所以作为应用java开发人员的我们,一般是不可能遇到这个层面抛出的这个异常,同时我也几乎可以判断这种方法是不会直接抛出java.lang.StackOverFlowError异常的,所以我们可以缩小我们的关注范围,把抛出这个异常的原因全部指向于虚拟机栈即可</p>
+</li>
+</ol>
+</li>
+<li><p>这种异常是如何发生的?</p>
+<ol>
+<li><p>我们知道每调用一次Java Method,就会往虚拟机栈中压入一个栈帧,在方法结束之前都不会出栈. 所以可以直接推理出在一个java线程运行过程中,如果同时调用的方法过多(比如递归的调用一个方法),就会出现这个异常</p>
+</li>
+<li><p>事实上,除了恶性递归或者虚拟机栈可用内存过小的情况下, 也很难触发这种异常, 所以一般来说遇到这种异常几乎是可以直接断定程序中存在恶性递归导致的.</p>
+</li>
+<li><p>这类问题在实际开发中遇到的并不多, 反而是在做一些算法问题的时候, 由于自己的疏忽从而引发不可预知的恶性递归</p>
+</li>
+</ol>
+</li>
+<li><p>一个简单的Demo复现这种异常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Main.main(null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上述代码就会报StackOverFlowError, 因为main方法会被不停的循环执行, 直到超出虚拟机栈能够承受的大小</p>
+<p>相关JVM参数<br>-Xss, 正常取值128K~256K, 如果仍然不够可以进行加大, 这个选项对性能影响比较大，需要严格的测试哦</p>
+<h4 id="java-lang-OutOfMemoryError-Java-heap-space"><a href="#java-lang-OutOfMemoryError-Java-heap-space" class="headerlink" title="java.lang.OutOfMemoryError: Java heap space"></a>java.lang.OutOfMemoryError: Java heap space</h4><p>这个异常表示, Java程序运行过程中遭遇了内存超限问题, 根本原因是Java的堆(Heap)内存超限</p>
+<p>Java常用的内存空间对应计算机硬件是哪些组件?<br>寄存器(比如每个Java线程独享程序计数器(Program Counter Register))<br>RAM(也就是我们常说的内存,java中的虚拟机栈,堆内存都用的这块)<br>什么是Java的堆内存(Heap)<br>这就涉及了Java的运行时内存模型了~</p>
+<p>我就简单来说下吧~</p>
+<p>一个JVM进程运行后, 会有一个主线程去运行我们写的Java程序, 那么每一个这种线程都拥有两大块内存空间</p>
+<p>线程共享内存空间堆(Heap, 所有java的对象实例和数组,jdk8后还存放了字符串常量池和类静态变量)</p>
+<p>方法区(存放类元数据,符号引用,静态常量,jdk8后HotSpot将其从永久代移动到了Metaspace)<br>线程独享内存空间<br>虚拟机栈(为Java方法提供的一块内存空间,内部有栈帧组成)<br>本地方法栈(为Java的native方法)<br>程序计数器(PC寄存器,记录执行行号)<br>所以Java的堆内存就是JVM中设定的一块专门存储所有java的对象实例和数组,jdk8后甚至包括字符串常量池和类静态变量的内存区域</p>
+<p>这种异常是如何发生的?<br>如果是1.7以前, Java堆溢出的问题根源是简单的, 就是运行时存在的对象实例和数组太多了!</p>
+<p>但是在1.8后, 由于还存放了字符串常量, 所以出现异常还有一种可能就是 interned Strings 过多导致的哦!</p>
+<p>最小复现Demo<br>执行前最好先修改下JVM参数,防止等待时间过长<br>JVM参数:<br>-Xms20m<br>-Xmx20m<br>-XX:MetaspaceSize=10m<br>-XX:MaxMetaspaceSize=10m<br>-XX:-UseGCOverheadLimit</p>
+<p>JVM参数说明: 限制堆大小20M,方便快速报错! 由于我用的是jdk8,所以限制了元空间的大小为10m,说实话在这个情况下没啥用哈哈哈哈哈哈哈(就是觉得加上去舒服才加的,不信我说的你可以自己google)!最后一个参数-XX:-UseGCOverheadLimit这个有必要加一下. 因为我的demo程序属于那种恶意的程序,所以一次GC几乎没办法清理任何对象实例,因为他们都在被占用着! 所以必须使用这个参数来防止GC检测出我的这种恶意程序,从而正常的提示堆溢出的错误而不是GC Overhead limit exceeded错误(这个错误会在后面细讲)</p>
+<p>普通的对象实例爆掉堆内存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        List&lt;Object&gt; list = new ArrayList();</span><br><span class="line">        int i = 0;</span><br><span class="line">        while(true)&#123;</span><br><span class="line">            list.add(new Object());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>interned Strings过多爆掉堆内存(有待考证此代码的准确性,请不要盲目相信,要有自己的想法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        List&lt;String&gt; list = new ArrayList();</span><br><span class="line">        int i = 0;</span><br><span class="line">        while(true)&#123;</span><br><span class="line">            list.add(String.valueOf(i++).intern());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码说明: 这串代码会每次生成一个新的interned String, 也就是数字递增对应的String表示, 所以最终爆掉内存, 证明了是interned Strings爆掉了内存, 相同的代码在jkd1.7以前是不会报堆内存溢出的, 请注意</p>
+<p>相关JVM参数<br>-Xms : 初始堆大小<br>-Xmx : 最大堆大小</p>
+<p>如何处理?<br>查看jvm快照,分析占用内存大的对象是哪些, 然后定位到代码位置, 最后进行优化</p>
+<p>我一般使用visualVM来查看这类问题</p>
+<h4 id="java-lang-OutOfMemoryError-GC-Overhead-limit-exceeded"><a href="#java-lang-OutOfMemoryError-GC-Overhead-limit-exceeded" class="headerlink" title="java.lang.OutOfMemoryError: GC Overhead limit exceeded"></a>java.lang.OutOfMemoryError: GC Overhead limit exceeded</h4><p>这个异常表示您的Java程序在运行的时候, 98%的时间都在执行GC回收, 但是每次回收只回收不到2%的空间!</p>
+<p>换句话说,其实这个异常往往是抛出java.lang.OutOfMemoryError: Java heap space异常的前兆! 因为Java程序每次都GC回收只能回收一点点内存空间,而你的程序却仍然在不停的产生新的对象实例, 这无疑导致了两种可能结果:</p>
+<p>不停的进行GC<br>直接超出的堆内存大小<br>这个问题还有一些细节需要我们去掌握,我们先从下面的例子来看吧</p>
+<p>最小复现Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[]) throws Exception &#123;</span><br><span class="line">        Map map = System.getProperties();</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            map.put(r.nextInt(), &quot;value&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码说明: 这段代码不停的往map中加入新的key-value,导致map大小不断变大! 当到达堆内存顶点的时候,GC发生, 但是清理完毕后,JVM发现清理前后的堆内存大小改变很小,不到2%; 这时候程序继续运行,继续往map中加数据!GC又发生了!又只清理不到2%! 如此不停的循环, 最后JVM得出了一个判断! 你的Java程序在占用CPU进行运算的时间里,98%的时间都特么的在垃圾回收,而每次GC居然只能回收堆内存的2%空间, 这肯定是代码存在问题,于是抛出了这个异常. 如果这个时候,你断定不是自己的代码问题, 使用JVM参数-XX:-UseGCOverheadLimit来关闭这种检查! 然后你就会发现你的程序抛出了堆溢出异常! 为什么呢? 因为堆内存不断的被占满,最终导致最后一次加入新的int的时候, 堆内存空间直接不足了!</p>
+<p>这个异常一般如何处理<br>和堆溢出的解决方式一致</p>
+<p>相关JVM参数<br>-XX:-UseGCOverheadLimit</p>
+<h4 id="java-lang-OutOfMemoryError-Permgen-space-jdk8已经不会出现此异常-请注意"><a href="#java-lang-OutOfMemoryError-Permgen-space-jdk8已经不会出现此异常-请注意" class="headerlink" title="java.lang.OutOfMemoryError: Permgen space (jdk8已经不会出现此异常,请注意)"></a>java.lang.OutOfMemoryError: Permgen space (jdk8已经不会出现此异常,请注意)</h4><p>只存在于jdk1.8以前的java程序中! 这个异常表示,永久代大小不够!</p>
+<p>什么是Permgen<br>是HotSpot在jdk1.8以前存在的一个区域,用于实现方法区</p>
+<p>什么时候会产生这个错误以及如何解决<br>由于是实现方法区的地方, 所以肯定是类元信息或者常量（jdk1.7后部分常量已经挪到堆中），静态常量和JIT即时编译器编译后的代码等数据太多导致大小不够</p>
+<p>乍一看也许你会头晕! 不过没关系, 根据我两年的开发经验, 我碰到过的唯一一次Permgen space问题是因为SpringIoC容器一口气加载了过多的Bean导致的!</p>
+<p>所以正常来说, 直接扩大这个区域的大小即可!</p>
+<p>比如使用如下JVM参数扩大:<br>-XX:MaxNewSize=xxxm -XX:MaxPermSize=xxxm</p>
+<p>最小复现Demo<br>运行要求: jdk版本 &lt;= 1.6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import javassist.ClassPool;</span><br><span class="line"></span><br><span class="line">public class MicroGenerator &#123;</span><br><span class="line">  public static void main(String[] args) throws Exception &#123;</span><br><span class="line">    for (int i = 0; i &lt; 100_000_000; i++) &#123;</span><br><span class="line">      generate(&quot;eu.plumbr.demo.Generated&quot; + i);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static Class generate(String name) throws Exception &#123;</span><br><span class="line">    ClassPool pool = ClassPool.getDefault();</span><br><span class="line">    return pool.makeClass(name).toClass();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>借助了javassist来不停的加载新的class,直至爆掉永久代区域</p>
+<p>相关JVM参数<br>-XX:PermSize=xxxm<br>-XX:MaxPermSize=xxxm</p>
+<h4 id="java-lang-OutOfMemoryError-Metaspace-since-jdk8-才有可能抛出的错误"><a href="#java-lang-OutOfMemoryError-Metaspace-since-jdk8-才有可能抛出的错误" class="headerlink" title="java.lang.OutOfMemoryError: Metaspace (since jdk8 才有可能抛出的错误)"></a>java.lang.OutOfMemoryError: Metaspace (since jdk8 才有可能抛出的错误)</h4><p>这个异常表示: Metaspace的空间不足导致OOM异常发生</p>
+<p>什么是Metaspace<br>有些不太专注JVM知识的小伙伴可能对Metaspace是陌生的, 因为这玩意是jdk8开始才正式登场的一块内存区域. 它专门用于替代原来的永久代, 且存在于本地内存中, 所以它的最大内存理论就是你电脑的最大内存. 和永久代不一样的是, 它可以进行自我扩容, 直到达到规定的MaxMetaspaceSize或者到达本机的最大可用内存为止.</p>
+<p>Metaspace接替了永久代的任务, 方法区的内容全部转移到此处(除了字符串常量池被挪到了堆中)</p>
+<p>不过相比于永久代, Metaspace进行GC的时候, 稍微改变了一点规则, Metaspace中类元数据是否需要回收是根据类加载器死活来来决定的, 这不同于永久代的, 只要类引用消失就会被回收. 这种规则会产生一些问题:</p>
+<p><a href="https://blog.csdn.net/xyghehehehe/article/details/78820135#commentsedit" target="_blank" rel="noopener">https://blog.csdn.net/xyghehehehe/article/details/78820135#commentsedit</a><br><a href="https://zhuanlan.zhihu.com/p/25634935" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25634935</a><br>所以在jdk8后使用反射,动态代理等会生成class对象的方法, 一定要小心MetaSpace是否会对其进行回收, 如果不会, 则需要进行相应的优化处理</p>
+<p>为什么要移除永久代<br>方法区大小难以设定，容易发生内存溢出。永久代会存放Class的相关信息，一般这些信息在编译期间就能确定大小。但是如果是在一些需要动态生成大量Class的应用中，如：Spring的动态代理、大量的JSP页面或动态生成JSP页面等，由于方法区的大小在一开始就要分配好，因此就能难确定大小，容易出现内存溢出</p>
+<p>GC复杂且效率低。方法区存储了类的元数据信息和各种常量，它的内存回收目标理应当是对这些类型的卸载和常量的回收。但由于这些数据被类的实例引用，卸载条件变得复杂且严格，回收不当会导致堆中的类实例失去元数据信息和常量信息。因此，回收方法区内存不是一件简单高效的事情。</p>
+<p>促进HotSpot JVM与JRockit VM的融合。JRockit没有方法区，移除永久代可以促进HotSpot JVM与JRockit VM的融合。</p>
+<p>最小复现Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> -XX:MetaspaceSize=8m</span><br><span class="line"> -XX:MaxMetaspaceSize=8m</span><br><span class="line"> */</span><br><span class="line">public class MetaSpaceOOMTest &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            Enhancer enhancer = new Enhancer();</span><br><span class="line">            enhancer.setSuperclass(OOMObject.class);</span><br><span class="line">            enhancer.setUseCache(false);</span><br><span class="line">            enhancer.setCallback(new MethodInterceptor() &#123;</span><br><span class="line">                public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable &#123;</span><br><span class="line">                    return proxy.invokeSuper(obj, args);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            //无限创建动态代理，生成Class对象</span><br><span class="line">            enhancer.create();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class OOMObject &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如何解决这类异常<br>增大MetaSpace的最大空间大小</p>
+<p>类似检查永久代异常一样的处理方式, 检查dump文件, 查看哪些类加载存在异常</p>
+<p>相关JVM参数<br>-XX:MetaspaceSize=8m<br>-XX:MaxMetaspaceSize=8m</p>
+<h4 id="java-lang-OutOfMemoryError-Unable-to-create-new-native-thread"><a href="#java-lang-OutOfMemoryError-Unable-to-create-new-native-thread" class="headerlink" title="java.lang.OutOfMemoryError: Unable to create new native thread"></a>java.lang.OutOfMemoryError: Unable to create new native thread</h4><p>这个异常表示,JVM无法再创建新的线程了!JVM能够创建的线程数是有限制的,</p>
+<p>复现demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class TestNativeOutOfMemoryError &#123;  </span><br><span class="line">  </span><br><span class="line">    public static void main(String[] args) &#123;  </span><br><span class="line">  </span><br><span class="line">        for (int i = 0;; i++) &#123;  </span><br><span class="line">            System.out.println(&quot;i = &quot; + i);  </span><br><span class="line">            new Thread(new HoldThread()).start();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">class HoldThread extends Thread &#123;  </span><br><span class="line">    CountDownLatch cdl = new CountDownLatch(1);  </span><br><span class="line">  </span><br><span class="line">    public HoldThread() &#123;  </span><br><span class="line">        this.setDaemon(true);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    public void run() &#123;  </span><br><span class="line">        try &#123;  </span><br><span class="line">            cdl.await();  </span><br><span class="line">        &#125; catch (InterruptedException e) &#123;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方案<br>去用线程池!</p>
+<p>检查代码是否存在bug在不停的生成新线程!</p>
+<p>如果确实需要那么多线程,那就修改OS和JVM的参数设置,并且加大你的硬件内存容量!</p>
+<h4 id="java-lang-OutOfMemoryError-request-size-bytes-for-reason"><a href="#java-lang-OutOfMemoryError-request-size-bytes-for-reason" class="headerlink" title="java.lang.OutOfMemoryError: request size bytes for reason"></a>java.lang.OutOfMemoryError: request size bytes for reason</h4><p>如果你看到了这个异常, 说明你的OS内存不够用了, JVM想本地操作系统申请内存被拒绝, 导致JVM进程无法继续运行! 发生这个问题的原因一般是你的Java程序需要的内存容量超过了操作系统可提供给JVM的最大内存容量, 连swap内存都没了</p>
+<h4 id="java-lang-OutOfMemoryError-Requested-array-size-exceeds-VM"><a href="#java-lang-OutOfMemoryError-Requested-array-size-exceeds-VM" class="headerlink" title="java.lang.OutOfMemoryError: Requested array size exceeds VM"></a>java.lang.OutOfMemoryError: Requested array size exceeds VM</h4><p>当你正准备创建一个超过虚拟机允许的大小的数组时，这条错误就会出现在你眼前!</p>
+<p>尾<br>本文对java常见的OOM异常做了总结说明,同时对于涉及的Java内存模型进行了说明,希望可以在日后遇到类似问题的时候可以沉着冷静,不慌不忙的来排查问题</p>
+<p><a href="https://zazalu.space/2019/09/17/java-memory-error-solution-Theoretically/" target="_blank" rel="noopener">参考文档</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+	<div>
+	  
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/09/27/相册测试页/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1919,169 +2153,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.dmlcc.cn/2019/08/01/终于自动部署成功/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DMLcc">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/author.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DMLcc">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/01/终于自动部署成功/" itemprop="url">完成自动部署项目</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-01T17:00:00+08:00">
-                2019-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人网站/" itemprop="url" rel="index">
-                    <span itemprop="name">个人网站</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/08/01/终于自动部署成功/" class="leancloud_visitors" data-flag-title="完成自动部署项目">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 <span>℃</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="jenkins-github-tomcat-完成自动部署项目"><a href="#jenkins-github-tomcat-完成自动部署项目" class="headerlink" title="jenkins+github+tomcat 完成自动部署项目"></a>jenkins+github+tomcat 完成自动部署项目</h4><p>服务器：阿里云<br>系统：宝塔Linux6.8.9</p>
-其实自动部署很见简单，不用打包的话，直接就跳过了最烦的步。<br>
-预计大概能在2个小时完成。但是我用了两天的原因，是配置webhook的问题-Payload URL，在教程中使用的是http://[ip]:[jenkins的端口号]/github-webhook ,于是我照样配置，出现了很坑的302问题，而我的jenkins能直接连接到github。也就是说我的github连不到jenkins，我试了各种ip各种端口，都不对。<br>在绝望的时候 http://[ip]:[jenkins的端口号]/github-webhook/ 改成了这个就是加个斜杠，成功200.我也是醉了。<br>参考的详细文档：<a>https://www.cnblogs.com/xxj0316/p/9467182.html</a><br><a>https://blog.csdn.net/weixin_43557605/article/details/95473363 </a>这篇文章就是那个少了斜杠坑我的，但是其他问题都不会出现<br><a>https://www.jianshu.com/p/8ace5eb85261</a> 这篇文档很形象的罗列了实现自动部署的方法<br>名。
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.自动部署就是自己的项目上传到github(仓库)</span><br><span class="line">2.然后github（仓库管理员）使用webhook（电话）通知Payload URL（电话号码）的主机（固定电话）</span><br><span class="line">3.这个主机（固定电话）上的jenkins（管家）会接受到提示</span><br><span class="line">4.然后去执行设定好的shell指令（就是Linux下的命令）</span><br><span class="line">5.应为我们是实现自动部署javaweb项目，容器是tomcat。</span><br><span class="line">  shell指令实现的功能有:</span><br><span class="line">  a、删除tomcat下的项目.war和文件夹。</span><br><span class="line">  b、将github传过来的javaweb压缩。</span><br><span class="line">  c、把压缩好的文件放到tomcat下，如果有需要可以修改文件</span><br></pre></td></tr></table></figure>
-
-<p>虽然垃圾简陋了点，但是我好歹把项目自动发布到了tomcat上了，我没用通过maven仓库的压缩，直接去用shell命令复制到了tomcat下。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-	<div>
-	  
-	</div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2134,7 +2205,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2224,6 +2295,7 @@
   
 </div>
 
+<!--
 
   <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
@@ -2237,10 +2309,10 @@
 
 
 
-
+-->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">| 博客全站共6.5k字</span>
+  <span class="post-count">博客全站共10.3k字</span>
 </div>
         
 
